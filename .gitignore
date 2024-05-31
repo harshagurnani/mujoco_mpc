@@ -18,6 +18,7 @@
 *.egg-info/
 .eggs/
 build/
+build/_deps/
 build_cmake/
 # Exclude macOS folder attributes
 .DS_Store
@@ -33,3 +34,4 @@ MJDATA.TXT
 MJMODEL.TXT
 # Python
 python/dist/
+Archive/
