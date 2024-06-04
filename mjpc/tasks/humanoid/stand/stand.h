@@ -59,7 +59,7 @@ class Stand : public Task {
   ResidualFn residual_;
 };
 
-}  // namespace fruitfly
+}  // namespace humanoid
 }  // namespace mjpc
 
 #endif  // MJPC_TASKS_HUMANOID_STAND_TASK_H_

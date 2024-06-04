@@ -12,6 +12,7 @@
     <numeric name="sampling_trajectories" data="60"/>
     <numeric name="sampling_exploration" data="0.04" />
     <numeric name="gradient_spline_points" data="5" />
+    <numeric name="residual_Height Goal" data="1.4 0.0 1.5" />
 
     <!-- estimator -->
     <numeric name="estimator" data="0" />

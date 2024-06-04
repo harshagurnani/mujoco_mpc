@@ -19,7 +19,7 @@
 
 #include "mjpc/task.h"
 #include "mjpc/tasks/fruitfly/flystand/flystand.h"
-#include "mjpc/tasks/fruitfly/flytracking/tracking.h"
+// #include "mjpc/tasks/fruitfly/flytracking/flytracking.h"
 #include "mjpc/tasks/acrobot/acrobot.h"
 #include "mjpc/tasks/allegro/allegro.h"
 #include "mjpc/tasks/bimanual/insert/insert.h"
@@ -47,7 +47,7 @@ namespace mjpc {
 std::vector<std::shared_ptr<Task>> GetTasks() {
   return {
       std::make_shared<fruitfly::FlyStand>(),
-      std::make_shared<fruitfly::FlyTracking>(),
+      // std::make_shared<fruitfly::FlyTracking>(),
       std::make_shared<Acrobot>(),
       std::make_shared<Allegro>(),
       std::make_shared<aloha::Handover>(),
