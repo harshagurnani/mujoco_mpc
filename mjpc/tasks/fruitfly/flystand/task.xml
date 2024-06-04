@@ -13,22 +13,6 @@
     <numeric name="sampling_exploration" data="0.04" />
     <numeric name="gradient_spline_points" data="5" />
 
-    <!-- residual -->
-    <numeric name="residual_select_Gait" data="0"/>
-    <text name="residual_list_Gait" data="Stand|Walk|Trot|Canter|Gallop"/>
-    <numeric name="residual_select_Gait switch" data="1"/>
-    <text name="residual_list_Gait switch" data="Manual|Automatic"/>
-    <numeric name="residual_Cadence" data="2 0 4" />
-    <numeric name="residual_Amplitude" data=".06 0 0.2" />
-    <numeric name="residual_Duty ratio" data="0 0 1"/>
-    <numeric name="residual_Walk speed" data="0 0 4"/>
-    <numeric name="residual_Walk turn" data="0 -2 2"/>
-    <numeric name="residual_select_Flip dir" data="0"/>
-    <text name="residual_list_Flip dir" data="Back Flip|Front Flip"/>
-    <numeric name="residual_select_Biped type" data="0"/>
-    <text name="residual_list_Biped type" data="Foot Stand|Hand Stand"/>
-    <numeric name="residual_Heading" data="0 -3.14 3.14" />
-
     <!-- estimator -->
     <numeric name="estimator" data="0" />
     <numeric name="estimator_sensor_start" data="9" />

@@ -67,7 +67,10 @@ add_custom_target(
   COMMAND patch -o ${CMAKE_CURRENT_BINARY_DIR}/fruitfly/fruitfly_force.xml
           ${CMAKE_CURRENT_BINARY_DIR}/fruitfly/fruitfly_force.xml
         #   <${CMAKE_CURRENT_SOURCE_DIR}/fruitfly/fruitfly_force.xml.patch
-
+  COMMAND ${CMAKE_COMMAND} -E copy_directory
+          ${CMAKE_CURRENT_SOURCE_DIR}/fruitfly/assets
+          ${CMAKE_CURRENT_BINARY_DIR}/fruitfly/assets
+          
   ## Menagerie models
   COMMAND ${CMAKE_COMMAND} -E copy
           ${menagerie_SOURCE_DIR}/shadow_hand/right_hand.xml
