@@ -8,7 +8,7 @@
            width="100" height="100"/>
   </asset>
 
-  <include file="assets/fruitfly.xml"/>
+  <include file="./fruitfly_force.xml"/>
 
   <worldbody>
     <geom name="floor" type="plane" size="5 5 .1" material="grid" pos="0 0 -.132" solref="0.0002 1"/>

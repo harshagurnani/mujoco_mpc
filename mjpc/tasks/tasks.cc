@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "mjpc/task.h"
+#include "mjpc/tasks/fruitfly/flystand/flystand.h"
 #include "mjpc/tasks/acrobot/acrobot.h"
 #include "mjpc/tasks/allegro/allegro.h"
 #include "mjpc/tasks/bimanual/insert/insert.h"
@@ -39,12 +40,12 @@
 #include "mjpc/tasks/shadow_reorient/hand.h"
 #include "mjpc/tasks/swimmer/swimmer.h"
 #include "mjpc/tasks/walker/walker.h"
-#include "mjpc/tasks/fruitfly/flystand/flystand.h"
 
 namespace mjpc {
 
 std::vector<std::shared_ptr<Task>> GetTasks() {
   return {
+      std::make_shared<fruitfly::FlyStand>(),
       std::make_shared<Acrobot>(),
       std::make_shared<Allegro>(),
       std::make_shared<aloha::Handover>(),
@@ -68,7 +69,6 @@ std::vector<std::shared_ptr<Task>> GetTasks() {
       std::make_shared<QuadrupedHill>(),
       std::make_shared<Swimmer>(),
       std::make_shared<Walker>(),
-      std::make_shared<fruitfly::FlyStand>(),
   };
 }
 }  // namespace mjpc

@@ -14,11 +14,11 @@
 
 #include "mjpc/tasks/fruitfly/flystand/flystand.h"
 
+#include <mujoco/mujoco.h>
+
 #include <string>
 
-#include <mujoco/mujoco.h>
 #include "mjpc/utilities.h"
-
 
 namespace mjpc::fruitfly {
 
@@ -38,7 +38,7 @@ std::string FlyStand::Name() const { return "Fruitfly Stand"; }
 //     Parameter (0): height_goal
 // ----------------------------------------------------------------
 void FlyStand::ResidualFn::Residual(const mjModel* model, const mjData* data,
-                                 double* residual) const {
+                                    double* residual) const {
   int counter = 0;
 
   // ----- Height: head feet vertical error ----- //
@@ -51,7 +51,10 @@ void FlyStand::ResidualFn::Residual(const mjModel* model, const mjData* data,
   double* f5_position = SensorByName(model, data, "T3_left_pos");
   double* f6_position = SensorByName(model, data, "T3_right_pos");
   double* head_position = SensorByName(model, data, "thorax_pos");
-  double head_feet_error = head_position[2] - (.167) * (f1_position[2] + f2_position[2] + f3_position[2] + f4_position[2] + f5_position[2] + f6_position[2]);
+  double head_feet_error =
+      head_position[2] -
+      (.167) * (f1_position[2] + f2_position[2] + f3_position[2] +
+                f4_position[2] + f5_position[2] + f6_position[2]);
   residual[counter++] = head_feet_error - parameters_[0];
 
   // ----- Balance: CoM-feet xy error ----- //
@@ -82,8 +85,8 @@ void FlyStand::ResidualFn::Residual(const mjModel* model, const mjData* data,
   counter += 2;
 
   // ----- joint velocity ----- //
-  mju_copy(residual + counter, data->qvel + 6, model->nv - 6);
-  counter += model->nv - 6;
+  mju_copy(residual + counter, data->qvel, model->nv);
+  counter += model->nv;
 
   // ----- action ----- //
   mju_copy(&residual[counter], data->ctrl, model->nu);

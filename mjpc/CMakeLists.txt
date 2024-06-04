@@ -50,6 +50,8 @@ add_library(
   tasks/cartpole/cartpole.h
   tasks/fingers/fingers.cc
   tasks/fingers/fingers.h
+  tasks/fruitfly/flystand/flystand.cc
+  tasks/fruitfly/flystand/flystand.h
   tasks/humanoid/stand/stand.cc
   tasks/humanoid/stand/stand.h
   tasks/humanoid/tracking/tracking.cc

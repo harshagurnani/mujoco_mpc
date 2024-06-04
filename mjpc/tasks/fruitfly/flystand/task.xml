@@ -48,8 +48,8 @@
   <worldbody>
     <light pos="0 0 1.5" dir="0 0 -1" diffuse="0.5 0.5 0.5" specular="0.3 0.3 0.3"
       directional="true" castshadow="false"/>
-    <geom name="floor" size="0 0 0.1" pos="0 0 -0.1" type="plane" material="blue_grid"/>
-     <body name="goal" mocap="true" pos=".3 0 0.1">
+    <geom name="floor" size="0 0 0.1" pos="0 0 -0.12" type="plane" material="blue_grid"/>
+     <body name="goal" mocap="true" pos=".3 0 0">
         <geom size="0.12" contype="0" conaffinity="0" rgba="0 1 0 .5" group="2"/>
       </body>
 
@@ -101,8 +101,8 @@
     <user name="Height" dim="1" user="6 100.0 0.0 100.0 0.1" />
     <user name="Balance" dim="1" user="6 50.0 0.0 100.0 0.1" />
     <user name="CoM Vel." dim="2" user="0 10.0 0.0 100.0" />
-    <user name="Joint Vel." dim="67" user="0 0.01 0.0 0.1" />
-    <user name="Control" dim="67" user="3 0.025 0.0 0.1 0.3" />
+    <user name="Joint Vel." dim="72" user="0 0.01 0.0 0.1" />
+    <user name="Control" dim="48" user="3 0.025 0.0 0.1 0.3" />
 
     <!-- estimator measurements -->
     <framepos name="thorax_pos" objtype="site"objname="thorax" />

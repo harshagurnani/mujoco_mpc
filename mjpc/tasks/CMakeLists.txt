@@ -60,6 +60,13 @@ add_custom_target(
   COMMAND patch -o ${CMAKE_CURRENT_BINARY_DIR}/walker/walker_modified.xml
           ${CMAKE_CURRENT_BINARY_DIR}/walker/walker.xml
           <${CMAKE_CURRENT_SOURCE_DIR}/walker/walker.xml.patch
+  # fruitfly
+  COMMAND ${CMAKE_COMMAND} -E copy
+          ${CMAKE_CURRENT_SOURCE_DIR}/fruitfly/fruitfly_force.xml
+          ${CMAKE_CURRENT_BINARY_DIR}/fruitfly/fruitfly_force.xml
+  COMMAND patch -o ${CMAKE_CURRENT_BINARY_DIR}/fruitfly/fruitfly_force.xml
+          ${CMAKE_CURRENT_BINARY_DIR}/fruitfly/fruitfly_force.xml
+        #   <${CMAKE_CURRENT_SOURCE_DIR}/fruitfly/fruitfly_force.xml.patch
 
   ## Menagerie models
   COMMAND ${CMAKE_COMMAND} -E copy
