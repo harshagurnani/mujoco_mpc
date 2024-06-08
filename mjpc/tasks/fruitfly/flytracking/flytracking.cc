@@ -41,7 +41,7 @@ std::tuple<int, int, double, double> ComputeInterpolationValues(double index,
 constexpr double kFps = 30.0;
 
 constexpr int kMotionLengths[] = {
-    181, // Flytracking
+    1, // Flytracking
     181, // Flytracking
     // 121,  // Jump - CMU-CMU-02-02_04
     // 154,  // Kick Spin - CMU-CMU-87-87_01
@@ -86,7 +86,7 @@ namespace mjpc::fruitfly {
 std::string FlyTracking::XmlPath() const {
   return GetModelPath("fruitfly/flytracking/task.xml");
 }
-std::string FlyTracking::Name() const { return "Fruiltfly Track"; }
+std::string FlyTracking::Name() const { return "Fruitfly Track"; }
 
 // ------------- Residuals for fruitfly tracking task -------------
 //   Number of residuals:

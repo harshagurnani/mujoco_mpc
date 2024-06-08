@@ -9,7 +9,7 @@
     <numeric name="sampling_representation" data="2" />
     <numeric name="agent_planner" data="2" />
     <numeric name="agent_horizon" data="0.5" />
-    <numeric name="agent_timestep" data="0.005" />
+    <numeric name="agent_timestep" data="0.001" />
     <numeric name="sampling_spline_points" data="16" />
     <numeric name="sampling_exploration" data="0.15" />
     <numeric name="sampling_trajectories" data="32" />
@@ -25,14 +25,14 @@
     </default>
   </default>
 
-  <option timestep="0.005"/>
+  <option timestep="0.00005" integrator="implicitfast"/>
 
   <worldbody>
       <!-- <body name="ball" pos="-0.05 0 -0.546997">
         <joint name="ball" pos="0 0 0" type="ball" />
         <geom name="floor" size="0.454" density="0.1" material="ballsurface"/>
       </body> -->
-    <geom name="floor" size="0 0 0.1" pos="0 0 -0.135" type="plane" material="blue_grid"/>
+    <geom name="floor" size="0 0 0.1" pos="0 0 -0.14" type="plane" material="blue_grid"/>
     <body name="mocap[coxa_T1_left]" mocap="true">
       <site name="mocap[coxa_T1_left]" class="mocap_site"/>
     </body>
@@ -131,82 +131,72 @@
   </worldbody>
 
   <sensor>
-    <user name="Joint Vel." dim="60" user="0 0.001 0.0 0.01" />
-    <user name="Control" dim="48" user="3 0.1 0 1.0 0.3" />
-    <user name="Pos[avg]" dim="3" user="6 1.0 0.0 100.0 0.1" />
+    <user name="Joint Vel." dim="60" user="0 1.0 0.0 10" />
+    <user name="Control"    dim="48" user="3 5 0 50.0 0.3" />
+    <user name="Pos[avg]"   dim="3"  user="6 100.0 0.0 100.0 0.1" />
 
-    <user name="Pos[coxa_T1_left]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[femur_T1_left]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tibia_T1_left]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tarsus_T1_left]" dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[claw_T1_left]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
+    <user name="Pos[coxa_T1_left]"    dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[femur_T1_left]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tibia_T1_left]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tarsus_T1_left]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[claw_T1_left]"    dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[coxa_T1_right]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[femur_T1_right]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tibia_T1_right]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tarsus_T1_right]" dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[claw_T1_right]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[coxa_T2_left]"    dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[femur_T2_left]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tibia_T2_left]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tarsus_T2_left]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[claw_T2_left]"    dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[coxa_T2_right]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[femur_T2_right]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tibia_T2_right]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tarsus_T2_right]" dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[claw_T2_right]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[coxa_T3_left]"    dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[femur_T3_left]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tibia_T3_left]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tarsus_T3_left]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[claw_T3_left]"    dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[coxa_T3_right]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[femur_T3_right]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tibia_T3_right]"  dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[tarsus_T3_right]" dim="3" user="6 1.5 0.0 10.0 0.1" />
+    <user name="Pos[claw_T3_right]"   dim="3" user="6 1.5 0.0 10.0 0.1" />
+
+    <user name="Vel[coxa_T1_left]"    dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[femur_T1_left]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tibia_T1_left]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tarsus_T1_left]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[claw_T1_left]"    dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[coxa_T1_right]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[femur_T1_right]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tibia_T1_right]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tarsus_T1_right]" dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[claw_T1_right]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[coxa_T2_left]"    dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[femur_T2_left]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tibia_T2_left]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tarsus_T2_left]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[claw_T2_left]"    dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[coxa_T2_right]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[femur_T2_right]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tibia_T2_right]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tarsus_T2_right]" dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[claw_T2_right]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[coxa_T3_left]"    dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[femur_T3_left]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tibia_T3_left]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tarsus_T3_left]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[claw_T3_left]"    dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[coxa_T3_right]"   dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[femur_T3_right]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tibia_T3_right]"  dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[tarsus_T3_right]" dim="3" user="6 0.5 0 5.0 0.3" />
+    <user name="Vel[claw_T3_right]"   dim="3" user="6 0.5 0 5.0 0.3" />  
     
-    <user name="Pos[coxa_T1_right]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[femur_T1_right]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tibia_T1_right]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tarsus_T1_right]" dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[claw_T1_right]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    
-    <user name="Pos[coxa_T2_left]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[femur_T2_left]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tibia_T2_left]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tarsus_T2_left]" dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[claw_T2_left]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    
-    <user name="Pos[coxa_T2_right]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[femur_T2_right]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tibia_T2_right]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tarsus_T2_right]" dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[claw_T2_right]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    
-    <user name="Pos[coxa_T3_left]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[femur_T3_left]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tibia_T3_left]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tarsus_T3_left]" dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[claw_T3_left]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    
-    <user name="Pos[coxa_T3_right]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[femur_T3_right]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tibia_T3_right]"  dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[tarsus_T3_right]" dim="3" user="6 1.0 0.0 10.0 0.1" />
-    <user name="Pos[claw_T3_right]"   dim="3" user="6 1.0 0.0 10.0 0.1" />
-
-    <user name="Vel[coxa_T1_left]"   dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[femur_T1_left]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tibia_T1_left]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tarsus_T1_left]" dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[claw_T1_left]"   dim="3" user="6 0.1 0 1.0 0.3" />
-
-    <user name="Vel[coxa_T1_right]"   dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[femur_T1_right]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tibia_T1_right]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tarsus_T1_right]" dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[claw_T1_right]"   dim="3" user="6 0.1 0 1.0 0.3" />
-
-    <user name="Vel[coxa_T2_left]"   dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[femur_T2_left]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tibia_T2_left]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tarsus_T2_left]" dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[claw_T2_left]"   dim="3" user="6 0.1 0 1.0 0.3" />
-
-    <user name="Vel[coxa_T2_right]"   dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[femur_T2_right]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tibia_T2_right]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tarsus_T2_right]" dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[claw_T2_right]"   dim="3" user="6 0.1 0 1.0 0.3" />
-
-    <user name="Vel[coxa_T3_left]"   dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[femur_T3_left]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tibia_T3_left]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tarsus_T3_left]" dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[claw_T3_left]"   dim="3" user="6 0.1 0 1.0 0.3" />
-
-    <user name="Vel[coxa_T3_right]"   dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[femur_T3_right]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tibia_T3_right]"  dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[tarsus_T3_right]" dim="3" user="6 0.1 0 1.0 0.3" />
-    <user name="Vel[claw_T3_right]"   dim="3" user="6 0.1 0 1.0 0.3" />
-
     <framepos name="trace0" objtype="body" objname="thorax"/>
 
     <framepos name="tracking_pos[coxa_T1_left]"   objtype="site" objname="tracking[coxa_T1_left]" />
