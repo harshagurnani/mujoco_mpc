@@ -41,8 +41,8 @@ std::tuple<int, int, double, double> ComputeInterpolationValues(double index,
 constexpr double kFps = 30.0;
 
 constexpr int kMotionLengths[] = {
-    1, // Flytracking
-    181, // Flytracking
+    170, // Flytracking
+    1809, // Flytracking
     // 121,  // Jump - CMU-CMU-02-02_04
     // 154,  // Kick Spin - CMU-CMU-87-87_01
     // 115,  // Spin Kick - CMU-CMU-88-88_06
@@ -120,8 +120,8 @@ void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
   int counter = 0;
 
   // ----- joint velocity ----- //
-  mju_copy(residual + counter, data->qvel-12, model->nv-12);
-  counter += model->nv-12;
+  mju_copy(residual + counter, data->qvel-6, model->nv-6);
+  counter += model->nv-6;
 
   // ----- action ----- //
   mju_copy(&residual[counter], data->ctrl, model->nu);

@@ -60,25 +60,25 @@ void FlyStand::ResidualFn::Residual(const mjModel* model, const mjData* data,
   // ----- Balance: CoM-feet xy error ----- //
 
   // capture point
-  double* com_position = SensorByName(model, data, "thorax_subtreecom");
+  // double* com_position = SensorByName(model, data, "thorax_subtreecom");
   double* com_velocity = SensorByName(model, data, "thorax_subtreelinvel");
-  double kFallTime = 0.2;
-  double capture_point[3] = {com_position[0], com_position[1], com_position[2]};
-  mju_addToScl3(capture_point, com_velocity, kFallTime);
+  // double kFallTime = 0.2;
+  // double capture_point[3] = {com_position[0], com_position[1], com_position[2]};
+  // mju_addToScl3(capture_point, com_velocity, kFallTime);
 
   // average feet xy position
-  double fxy_avg[2] = {0.0};
-  mju_addTo(fxy_avg, f1_position, 2);
-  mju_addTo(fxy_avg, f2_position, 2);
-  mju_addTo(fxy_avg, f3_position, 2);
-  mju_addTo(fxy_avg, f4_position, 2);
-  mju_addTo(fxy_avg, f5_position, 2);
-  mju_addTo(fxy_avg, f6_position, 2);
-  mju_scl(fxy_avg, fxy_avg, 0.25, 2);
+  // double fxy_avg[2] = {0.0};
+  // mju_addTo(fxy_avg, f1_position, 2);
+  // mju_addTo(fxy_avg, f2_position, 2);
+  // mju_addTo(fxy_avg, f3_position, 2);
+  // mju_addTo(fxy_avg, f4_position, 2);
+  // mju_addTo(fxy_avg, f5_position, 2);
+  // mju_addTo(fxy_avg, f6_position, 2);
+  // mju_scl(fxy_avg, fxy_avg, 0.25, 2);
 
-  mju_subFrom(fxy_avg, capture_point, 2);
-  double com_feet_distance = mju_norm(fxy_avg, 2);
-  residual[counter++] = com_feet_distance;
+  // mju_subFrom(fxy_avg, capture_point, 2);
+  // double com_feet_distance = mju_norm(fxy_avg, 2);
+  // residual[counter++] = com_feet_distance;
 
   // ----- COM xy velocity should be 0 ----- //
   mju_copy(&residual[counter], com_velocity, 2);
@@ -93,19 +93,7 @@ void FlyStand::ResidualFn::Residual(const mjModel* model, const mjData* data,
   counter += model->nu;
 
   // sensor dim sanity check
-  // TODO: use this pattern everywhere and make this a utility function
-  int user_sensor_dim = 0;
-  for (int i = 0; i < model->nsensor; i++) {
-    if (model->sensor_type[i] == mjSENS_USER) {
-      user_sensor_dim += model->sensor_dim[i];
-    }
-  }
-  if (user_sensor_dim != counter) {
-    mju_error_i(
-        "mismatch between total user-sensor dimension "
-        "and actual length of residual %d",
-        counter);
-  }
+  CheckSensorDim(model, counter);
 }
 
 }  // namespace mjpc::fruitfly
