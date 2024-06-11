@@ -14,6 +14,8 @@
 
 #include "mjpc/tasks/fruitfly/flytracking/flytracking.h"
 
+#include <mujoco/mujoco.h>
+
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -21,7 +23,6 @@
 #include <string>
 #include <tuple>
 
-#include <mujoco/mujoco.h>
 #include "mjpc/utilities.h"
 
 namespace {
@@ -38,21 +39,21 @@ std::tuple<int, int, double, double> ComputeInterpolationValues(double index,
 }
 
 // Hardcoded constant matching keyframes from CMU mocap dataset.
-constexpr double kFps = 30.0;
+constexpr double kFps = 200.0;
 
 constexpr int kMotionLengths[] = {
-    170, // Flytracking
-    1809, // Flytracking
-    // 121,  // Jump - CMU-CMU-02-02_04
-    // 154,  // Kick Spin - CMU-CMU-87-87_01
-    // 115,  // Spin Kick - CMU-CMU-88-88_06
-    // 78,   // Cartwheel (1) - CMU-CMU-88-88_07
-    // 145,  // Crouch Flip - CMU-CMU-88-88_08
-    // 188,  // Cartwheel (2) - CMU-CMU-88-88_09
-    // 260,  // Monkey Flip - CMU-CMU-90-90_19
-    // 279,  // Dance - CMU-CMU-103-103_08
-    // 39,   // Run - CMU-CMU-108-108_13
-    // 510,  // Walk - CMU-CMU-137-137_40
+    1700,   // Flytracking
+    1560,  // Flytracking
+           // 121,  // Jump - CMU-CMU-02-02_04
+           // 154,  // Kick Spin - CMU-CMU-87-87_01
+           // 115,  // Spin Kick - CMU-CMU-88-88_06
+           // 78,   // Cartwheel (1) - CMU-CMU-88-88_07
+           // 145,  // Crouch Flip - CMU-CMU-88-88_08
+           // 188,  // Cartwheel (2) - CMU-CMU-88-88_09
+           // 260,  // Monkey Flip - CMU-CMU-90-90_19
+           // 279,  // Dance - CMU-CMU-103-103_08
+           // 39,   // Run - CMU-CMU-108-108_13
+           // 510,  // Walk - CMU-CMU-137-137_40
 };
 
 // return length of motion trajectory
@@ -69,15 +70,14 @@ int MotionStartIndex(int id) {
 
 // names for fruitfly bodies
 const std::array<std::string, 30> body_names = {
-    "coxa_T1_left",  "femur_T1_left",  "tibia_T1_left",  "tarsus_T1_left",  "claw_T1_left", 
-    "coxa_T1_right", "femur_T1_right", "tibia_T1_right", "tarsus_T1_right", "claw_T1_right", 
-    "coxa_T2_left",  "femur_T2_left",  "tibia_T2_left",  "tarsus_T2_left",  "claw_T2_left", 
-    "coxa_T2_right", "femur_T2_right", "tibia_T2_right", "tarsus_T2_right", "claw_T2_right", 
-    "coxa_T3_left",  "femur_T3_left",  "tibia_T3_left",  "tarsus_T3_left",  "claw_T3_left", 
-    "coxa_T3_right", "femur_T3_right", "tibia_T3_right", "tarsus_T3_right", "claw_T3_right"
-};
-
-
+    "coxa_T1_left",    "femur_T1_left",  "tibia_T1_left",   "tarsus_T1_left",
+    "claw_T1_left",    "coxa_T1_right",  "femur_T1_right",  "tibia_T1_right",
+    "tarsus_T1_right", "claw_T1_right",  "coxa_T2_left",    "femur_T2_left",
+    "tibia_T2_left",   "tarsus_T2_left", "claw_T2_left",    "coxa_T2_right",
+    "femur_T2_right",  "tibia_T2_right", "tarsus_T2_right", "claw_T2_right",
+    "coxa_T3_left",    "femur_T3_left",  "tibia_T3_left",   "tarsus_T3_left",
+    "claw_T3_left",    "coxa_T3_right",  "femur_T3_right",  "tibia_T3_right",
+    "tarsus_T3_right", "claw_T3_right"};
 
 }  // namespace
 
@@ -99,7 +99,7 @@ std::string FlyTracking::Name() const { return "Fruitfly Track"; }
 //   Number of parameters: 0
 // ----------------------------------------------------------------
 void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
-                                  double *residual) const {
+                                       double *residual) const {
   // ----- get mocap frames ----- //
   // get motion start index
   int start = MotionStartIndex(current_mode_);
@@ -120,8 +120,8 @@ void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
   int counter = 0;
 
   // ----- joint velocity ----- //
-  mju_copy(residual + counter, data->qvel-6, model->nv-6);
-  counter += model->nv-6;
+  mju_copy(residual + counter, data->qvel - 6, model->nv - 6);
+  counter += model->nv - 6;
 
   // ----- action ----- //
   mju_copy(&residual[counter], data->ctrl, model->nu);
@@ -169,8 +169,8 @@ void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
     mju_addTo3(avg_sensor_pos, body_sensor_pos);
     num_body++;
   }
-  mju_scl3(avg_mpos, avg_mpos, 1.0/num_body);
-  mju_scl3(avg_sensor_pos, avg_sensor_pos, 1.0/num_body);
+  mju_scl3(avg_mpos, avg_mpos, 1.0 / num_body);
+  mju_scl3(avg_sensor_pos, avg_sensor_pos, 1.0 / num_body);
 
   // residual for averages
   mju_sub3(&residual[counter], avg_mpos, avg_sensor_pos);
@@ -217,7 +217,6 @@ void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
 
     counter += 3;
   }
-
 
   CheckSensorDim(model, counter);
 }

@@ -3,14 +3,15 @@
   <!-- modified from: https://github.com/google-deepmind/dm_control/blob/main/dm_control/suite/humanoid.xml -->
   <include file="../fruitfly_force.xml" />
   
-  <!-- <option timestep="0.0001" integrator="implicitfast"/> -->
+  <!-- <option timestep="0.0001" />  -->
+  <!-- integrator="implicitfast"/> -->
 
   <custom>
     <text    name="task_transition" data="Walk1|Walk2" />
     <numeric name="sampling_representation" data="2" />
     <numeric name="agent_planner" data="2" />
     <numeric name="agent_horizon" data="0.5" />
-    <numeric name="agent_timestep" data="0.005" />
+    <numeric name="agent_timestep" data="0.1" />
     <numeric name="sampling_spline_points" data="16" />
     <numeric name="sampling_exploration" data="0.15" />
     <numeric name="sampling_trajectories" data="32" />
@@ -22,7 +23,7 @@
 
   <default>
     <default class="mocap_site">
-      <site type="sphere" size="0.015" rgba="0 0 1 1" group="3" material="target"/>
+      <site type="sphere" size="0.01" rgba="0 0 1 1" group="3" material="target"/>
     </default>
   </default>
 
@@ -166,36 +167,36 @@
     <user name="Pos[tarsus_T3_right]" dim="3" user="6 75 0.0 100.0 0.1" />
     <user name="Pos[claw_T3_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
 
-    <user name="Vel[coxa_T1_left]"    dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[femur_T1_left]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tibia_T1_left]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tarsus_T1_left]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[claw_T1_left]"    dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[coxa_T1_right]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[femur_T1_right]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tibia_T1_right]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tarsus_T1_right]" dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[claw_T1_right]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[coxa_T2_left]"    dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[femur_T2_left]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tibia_T2_left]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tarsus_T2_left]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[claw_T2_left]"    dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[coxa_T2_right]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[femur_T2_right]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tibia_T2_right]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tarsus_T2_right]" dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[claw_T2_right]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[coxa_T3_left]"    dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[femur_T3_left]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tibia_T3_left]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tarsus_T3_left]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[claw_T3_left]"    dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[coxa_T3_right]"   dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[femur_T3_right]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tibia_T3_right]"  dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[tarsus_T3_right]" dim="3" user="6 2 0 5.0 0.3" />
-    <user name="Vel[claw_T3_right]"   dim="3" user="6 2 0 5.0 0.3" />  
+    <user name="Vel[coxa_T1_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T1_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T1_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T1_left]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T1_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T1_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T1_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T1_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T1_right]" dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T1_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T2_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T2_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T2_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T2_left]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T2_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T2_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T2_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T2_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T2_right]" dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T2_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T3_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T3_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T3_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T3_left]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T3_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T3_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T3_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T3_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T3_right]" dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T3_right]"   dim="3" user="6 3 0 5.0 0.3" />  
     
     <framepos name="trace0" objtype="body" objname="thorax"/>
 

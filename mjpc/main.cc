@@ -23,7 +23,7 @@
 #include "mjpc/app.h"
 #include "mjpc/tasks/tasks.h"
 
-ABSL_FLAG(std::string, task, "Fruitfly Stand",
+ABSL_FLAG(std::string, task, "Fruitfly Track",
           "Which model to load on startup.");
 
 // machinery for replacing command line error by a macOS dialog box
