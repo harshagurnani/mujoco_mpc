@@ -1,17 +1,17 @@
-<mujoco model="FruitFly Track">
+<mujoco model="FruitFly TrackFree">
   <include file="../../common.xml"/>
   <!-- modified from: https://github.com/google-deepmind/dm_control/blob/main/dm_control/suite/humanoid.xml -->
-  <include file="../fruitfly_force.xml" />
+  <include file="../fruitfly_freeforce.xml" />
   
   <!-- <option timestep="0.0001" />  -->
   <!-- integrator="implicitfast"/> -->
 
   <custom>
-    <text    name="task_transition" data="Walk1|Walk2|Stand1|Stand2" />
+    <text    name="task_transition" data="Stand2|Stand1|Walk1|Walk2" />
     <numeric name="sampling_representation" data="2" />
     <numeric name="agent_planner" data="2" />
-    <numeric name="agent_horizon" data="0.5" />
-    <numeric name="agent_timestep" data="0.1" />
+    <numeric name="agent_horizon" data="1.0" />
+    <numeric name="agent_timestep" data="0.01" />
     <numeric name="sampling_spline_points" data="16" />
     <numeric name="sampling_exploration" data="0.15" />
     <numeric name="sampling_trajectories" data="32" />
@@ -132,40 +132,40 @@
   </worldbody>
 
   <sensor>
-    <user name="Joint Vel." dim="60" user="0 0.1 0.0 10" />
-    <user name="Control"    dim="48" user="3 0.5 0 1.0 0.3" />
+    <user name="Joint Vel." dim="60" user="0 1 0.0 10" />
+    <user name="Control"    dim="48" user="3 .5 0 100 0.3" />
     <user name="Pos[avg]"   dim="3"  user="6 25.0 0.0 100.0 0.1" />
 
-    <user name="Pos[coxa_T1_left]"    dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[femur_T1_left]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tibia_T1_left]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tarsus_T1_left]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[claw_T1_left]"    dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[coxa_T1_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[femur_T1_right]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tibia_T1_right]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tarsus_T1_right]" dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[claw_T1_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[coxa_T2_left]"    dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[femur_T2_left]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tibia_T2_left]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tarsus_T2_left]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[claw_T2_left]"    dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[coxa_T2_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[femur_T2_right]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tibia_T2_right]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tarsus_T2_right]" dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[claw_T2_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[coxa_T3_left]"    dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[femur_T3_left]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tibia_T3_left]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tarsus_T3_left]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[claw_T3_left]"    dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[coxa_T3_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[femur_T3_right]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tibia_T3_right]"  dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[tarsus_T3_right]" dim="3" user="6 75 0.0 100.0 0.1" />
-    <user name="Pos[claw_T3_right]"   dim="3" user="6 75 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T1_left]"    dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T1_left]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T1_left]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T1_left]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[claw_T1_left]"    dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T1_right]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T1_right]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T1_right]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T1_right]" dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[claw_T1_right]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T2_left]"    dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T2_left]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T2_left]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T2_left]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[claw_T2_left]"    dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T2_right]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T2_right]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T2_right]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T2_right]" dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[claw_T2_right]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T3_left]"    dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T3_left]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T3_left]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T3_left]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[claw_T3_left]"    dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T3_right]"   dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T3_right]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T3_right]"  dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T3_right]" dim="3" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[claw_T3_right]"   dim="3" user="6 20 0.0 100.0 0.1" />
 
     <user name="Vel[coxa_T1_left]"    dim="3" user="6 3 0 5.0 0.3" />
     <user name="Vel[femur_T1_left]"   dim="3" user="6 3 0 5.0 0.3" />
@@ -274,8 +274,8 @@
    
   </sensor>
 
-  <include file="./keyframes/Fly_walk_pos1.xml" /> 
-  <include file="./keyframes/Fly_walk_pos2.xml" />  
-  <include file="./keyframes/Fly_stand_pos1.xml" />  
-  <include file="./keyframes/Fly_stand_pos2.xml" />  
+  <include file="./keyframes/Fly_stand_free_pos2.xml" />  
+  <include file="./keyframes/Fly_stand_free_pos1.xml" />  
+  <include file="./keyframes/Fly_walk_free_pos1.xml" /> 
+  <include file="./keyframes/Fly_walk_free_pos2.xml" />  
 </mujoco>

@@ -63,13 +63,12 @@
     </default>
   </default>
 
-  <!-- modified from: https://github.com/google-deepmind/mujoco_menagerie/tree/main/unitree_a1 -->
-  <include file="../fruitfly_force.xml" />
+  <include file="../fruitfly_freeforce.xml" />
 
   <sensor>
     <!-- cost -->
     <user name="Height" dim="1" user="6 100.0 0.0 100.0 0.1" />
-    <!-- <user name="Balance" dim="1" user="6 50.0 0.0 100.0 0.1" /> -->
+    <user name="Balance" dim="1" user="6 50.0 0.0 100.0 0.1" />
     <user name="CoM Vel." dim="2" user="0 10.0 0.0 100.0" />
     <user name="Joint Vel." dim="66" user="0 0.01 0.0 0.1" />
     <user name="Control" dim="48" user="3 0.025 0.0 0.1 0.3" />

@@ -54,6 +54,8 @@ add_library(
   tasks/fruitfly/flystand/flystand.h
   tasks/fruitfly/flytracking/flytracking.cc
   tasks/fruitfly/flytracking/flytracking.h
+  tasks/fruitfly/flytrackingfree/flytrackingfree.cc
+  tasks/fruitfly/flytrackingfree/flytrackingfree.h
   tasks/humanoid/stand/stand.cc
   tasks/humanoid/stand/stand.h
   tasks/humanoid/tracking/tracking.cc

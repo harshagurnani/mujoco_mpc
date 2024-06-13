@@ -51,42 +51,39 @@ void FlyStand::ResidualFn::Residual(const mjModel* model, const mjData* data,
   double* f5_position = SensorByName(model, data, "T3_left_pos");
   double* f6_position = SensorByName(model, data, "T3_right_pos");
   double* head_position = SensorByName(model, data, "thorax_pos");
-  double head_feet_error =
-      head_position[2] -
-      (.167) * (f1_position[2] + f2_position[2] + f3_position[2] +
-                f4_position[2] + f5_position[2] + f6_position[2]);
+  double head_feet_error = head_position[2];
   residual[counter++] = head_feet_error - parameters_[0];
 
   // ----- Balance: CoM-feet xy error ----- //
 
   // capture point
-  // double* com_position = SensorByName(model, data, "thorax_subtreecom");
+  double* com_position = SensorByName(model, data, "thorax_subtreecom");
   double* com_velocity = SensorByName(model, data, "thorax_subtreelinvel");
-  // double kFallTime = 0.2;
-  // double capture_point[3] = {com_position[0], com_position[1], com_position[2]};
-  // mju_addToScl3(capture_point, com_velocity, kFallTime);
+  double kFallTime = 0.2;
+  double capture_point[3] = {com_position[0], com_position[1], com_position[2]};
+  mju_addToScl3(capture_point, com_velocity, kFallTime);
 
   // average feet xy position
-  // double fxy_avg[2] = {0.0};
-  // mju_addTo(fxy_avg, f1_position, 2);
-  // mju_addTo(fxy_avg, f2_position, 2);
-  // mju_addTo(fxy_avg, f3_position, 2);
-  // mju_addTo(fxy_avg, f4_position, 2);
-  // mju_addTo(fxy_avg, f5_position, 2);
-  // mju_addTo(fxy_avg, f6_position, 2);
-  // mju_scl(fxy_avg, fxy_avg, 0.25, 2);
+  double fxy_avg[2] = {0.0};
+  mju_addTo(fxy_avg, f1_position, 2);
+  mju_addTo(fxy_avg, f2_position, 2);
+  mju_addTo(fxy_avg, f3_position, 2);
+  mju_addTo(fxy_avg, f4_position, 2);
+  mju_addTo(fxy_avg, f5_position, 2);
+  mju_addTo(fxy_avg, f6_position, 2);
+  mju_scl(fxy_avg, fxy_avg, 0.25, 2);
 
-  // mju_subFrom(fxy_avg, capture_point, 2);
-  // double com_feet_distance = mju_norm(fxy_avg, 2);
-  // residual[counter++] = com_feet_distance;
+  mju_subFrom(fxy_avg, capture_point, 2);
+  double com_feet_distance = mju_norm(fxy_avg, 2);
+  residual[counter++] = com_feet_distance;
 
   // ----- COM xy velocity should be 0 ----- //
   mju_copy(&residual[counter], com_velocity, 2);
   counter += 2;
 
   // ----- joint velocity ----- //
-  mju_copy(residual + counter, data->qvel, model->nv);
-  counter += model->nv;
+  mju_copy(residual + counter, data->qvel+6, model->nv-6);
+  counter += model->nv-6;
 
   // ----- action ----- //
   mju_copy(&residual[counter], data->ctrl, model->nu);

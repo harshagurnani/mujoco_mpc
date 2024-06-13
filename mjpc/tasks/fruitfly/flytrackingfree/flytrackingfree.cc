@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "mjpc/tasks/fruitfly/flytracking/flytracking.h"
+#include "mjpc/tasks/fruitfly/flytrackingfree/flytrackingfree.h"
 
 #include <mujoco/mujoco.h>
 
@@ -42,10 +42,10 @@ std::tuple<int, int, double, double> ComputeInterpolationValues(double index,
 constexpr double kFps = 200.0;
 
 constexpr int kMotionLengths[] = {
-    1700,   // Flytracking
-    1560,  // Flytracking
-    1,  // FlyStand
-    1,  // FlyStand
+    8,  // FlyStand
+    8,  // FlyStand
+    1700,   // FlytrackingFree
+    1560,  // FlytrackingFree
            // 121,  // Jump - CMU-CMU-02-02_04
            // 154,  // Kick Spin - CMU-CMU-87-87_01
            // 115,  // Spin Kick - CMU-CMU-88-88_06
@@ -85,22 +85,22 @@ const std::array<std::string, 30> body_names = {
 
 namespace mjpc::fruitfly {
 
-std::string FlyTracking::XmlPath() const {
-  return GetModelPath("fruitfly/flytracking/task.xml");
+std::string FlyTrackingFree::XmlPath() const {
+  return GetModelPath("fruitfly/flytrackingfree/task.xml");
 }
-std::string FlyTracking::Name() const { return "Fruitfly Track"; }
+std::string FlyTrackingFree::Name() const { return "Fruitfly TrackFree"; }
 
 // ------------- Residuals for fruitfly tracking task -------------
 //   Number of residuals:
 //     Residual (0): Joint vel: minimise joint velocity
 //     Residual (1): Control: minimise control
-//     Residual (2-11): Tracking position: minimise tracking position error
+//     Residual (2-31): Tracking position: minimise tracking position error
 //         for {root, head, toe, heel, knee, hand, elbow, shoulder, hip}.
-//     Residual (11-20): Tracking velocity: minimise tracking velocity error
+//     Residual (31-66): Tracking velocity: minimise tracking velocity error
 //         for {root, head, toe, heel, knee, hand, elbow, shoulder, hip}.
 //   Number of parameters: 0
 // ----------------------------------------------------------------
-void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
+void FlyTrackingFree::ResidualFn::Residual(const mjModel *model, const mjData *data,
                                        double *residual) const {
   // ----- get mocap frames ----- //
   // get motion start index
@@ -122,8 +122,8 @@ void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
   int counter = 0;
 
   // ----- joint velocity ----- //
-  mju_copy(residual + counter, data->qvel - 6, model->nv - 6);
-  counter += model->nv - 6;
+  mju_copy(residual + counter, data->qvel - 12, model->nv - 12);
+  counter += model->nv - 12;
 
   // ----- action ----- //
   mju_copy(&residual[counter], data->ctrl, model->nu);
@@ -228,7 +228,7 @@ void FlyTracking::ResidualFn::Residual(const mjModel *model, const mjData *data,
 //   Linearly interpolate between two consecutive key frames in order to
 //   smooth the transitions between keyframes.
 // ----------------------------------------------------------------------------
-void FlyTracking::TransitionLocked(mjModel *model, mjData *d) {
+void FlyTrackingFree::TransitionLocked(mjModel *model, mjData *d) {
   // get motion start index
   int start = MotionStartIndex(mode);
   // get motion trajectory length
