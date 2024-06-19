@@ -94,6 +94,7 @@ std::string FlyTrackingFree::Name() const { return "Fruitfly TrackFree"; }
 //   Number of residuals:
 //     Residual (0): Joint vel: minimise joint velocity
 //     Residual (1): Control: minimise control
+//     Residual (2): 
 //     Residual (2-31): Tracking position: minimise tracking position error
 //         for {root, head, toe, heel, knee, hand, elbow, shoulder, hip}.
 //     Residual (31-66): Tracking velocity: minimise tracking velocity error
@@ -128,6 +129,38 @@ void FlyTrackingFree::ResidualFn::Residual(const mjModel *model, const mjData *d
   // ----- action ----- //
   mju_copy(&residual[counter], data->ctrl, model->nu);
   counter += model->nu;
+
+
+  // double axis[3];
+  // double center[3];
+  // double vec[3];
+  // double pcp[3];
+  // mju_sub3(axis, foot_right, foot_left);
+  // axis[2] = 1.0e-3;
+  // double length = 0.5 * mju_normalize3(axis) - 0.05;
+  // mju_add3(center, foot_right, foot_left);
+  // mju_scl3(center, center, 0.5);
+  // mju_sub3(vec, capture_point, center);
+
+  // // project onto axis
+  // double t = mju_dot3(vec, axis);
+
+  // // clamp
+  // t = mju_max(-length, mju_min(length, t));
+  // mju_scl3(vec, axis, t);
+  // mju_add3(pcp, vec, center);
+  // pcp[2] = 1.0e-3;
+
+  // // is standing
+  // double standing =
+  //     torso_height / mju_sqrt(torso_height * torso_height + 0.45 * 0.45) - 0.4;
+
+  // mju_sub(&residual[counter], capture_point, pcp, 2);
+  // mju_scl(&residual[counter], &residual[counter], standing, 2);
+
+  // counter += 2;
+
+
 
   // ----- position ----- //
   // Compute interpolated frame.
