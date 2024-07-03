@@ -33,7 +33,7 @@
         <joint name="ball" pos="0 0 0" type="ball" />
         <geom name="floor" size="0.454" density="0.1" material="ballsurface"/>
       </body> -->
-    <geom name="floor" size="0 0 0.1" pos="0 0 -0.1375" type="plane" material="blue_grid"/>
+    <geom name="floor" size="0 0 0.1" pos="0 0 -0.1" type="plane" material="blue_grid"/>
     <body name="mocap[coxa_T1_left]" mocap="true">
       <site name="mocap[coxa_T1_left]" class="mocap_site"/>
     </body>

@@ -47,6 +47,28 @@ class FlyTrackingFree : public Task {
     friend class FlyTrackingFree;
     int current_mode_;
     double reference_time_;
+    // feet
+    enum FlyFoot {
+      kFootT1L  = 0,
+      kFootT1R,
+      kFootT2L,
+      kFootT2R,
+      kFootT3L,
+      kFootT3R,
+      kNumFoot
+    };
+    constexpr static FlyFoot kFootAll[kNumFoot] = {kFootT1L, kFootT1R, 
+                                                   kFootT2L, kFootT2R, 
+                                                   kFootT3L, kFootT3R, };
+    //  ============  enums  ============
+    int jointVel_id_           = -1;
+    int thorax_body_id_        = -1;
+    int head_site_id_          = -1;
+    int control_id_            = -1;
+    int height_id_             = -1;
+    int balance_id_            = -1;
+    int upright_id_            = -1;
+    int foot_geom_id_[kNumFoot];
   };
 
   FlyTrackingFree() : residual_(this) {}
@@ -57,6 +79,8 @@ class FlyTrackingFree : public Task {
   //   smooth the transitions between keyframes.
   // ---------------------------------------------------------------------------
   void TransitionLocked(mjModel* model, mjData* data) override;
+
+  void ResetLocked(const mjModel* model) override;
 
   std::string Name() const override;
   std::string XmlPath() const override;

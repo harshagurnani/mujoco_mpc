@@ -1,0 +1,303 @@
+<mujoco model="FruitFly TrackQpos">
+  <include file="../../common.xml"/>
+  <!-- modified from: https://github.com/google-deepmind/dm_control/blob/main/dm_control/suite/humanoid.xml -->
+  <include file="../fruitfly_freeforce.xml" />
+  
+  <!-- <option timestep="0.0001" />  -->
+  <!-- integrator="implicitfast"/> -->
+
+  <custom>
+    <text    name="task_transition" data="Walk1|Walk2" />
+    <numeric name="sampling_representation" data="2" />
+    <numeric name="agent_planner" data="2" />
+    <numeric name="agent_horizon" data="1.0" />
+    <numeric name="agent_timestep" data="0.01" />
+    <numeric name="sampling_spline_points" data="16" />
+    <numeric name="sampling_exploration" data="0.15" />
+    <numeric name="sampling_trajectories" data="32" />
+    <numeric name="gradient_spline_points" data="10" />
+    <numeric name="ilqg_num_rollouts" data="32" />
+    <numeric name="ilqg_regularization_type" data="1" />
+    <numeric name="ilqg_representation" data="2" />
+    <numeric name="residual_Torso" data="-.01 -.1 0.1" />
+    <numeric name="residual_Speed" data="0.00 -0.1 0.1" />
+  </custom>
+
+  <default>
+    <default class="mocap_site">
+      <site type="sphere" size="0.01" rgba="0 0 1 1" group="3" material="target"/>
+    </default>
+  </default>
+
+
+  <worldbody>
+      <!-- <body name="ball" pos="-0.05 0 -0.546997">
+        <joint name="ball" pos="0 0 0" type="ball" />
+        <geom name="floor" size="0.454" density="0.1" material="ballsurface"/>
+      </body> -->
+    <geom name="floor" size="0 0 0.1" pos="0 0 -0.137" type="plane" material="blue_grid"/>
+    <body name="mocap[coxa_T1_left]" mocap="true">
+      <site name="mocap[coxa_T1_left]" class="mocap_site"/>
+    </body>
+    <body name="mocap[femur_T1_left]" mocap="true">
+      <site name="mocap[femur_T1_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[tibia_T1_left]" mocap="true">
+      <site name="mocap[tibia_T1_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[tarsus_T1_left]" mocap="true">
+      <site name="mocap[tarsus_T1_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[claw_T1_left]" mocap="true">
+      <site name="mocap[claw_T1_left]" class="mocap_site" />
+    </body>
+
+    <body name="mocap[coxa_T1_right]" mocap="true">
+      <site name="mocap[coxa_T1_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[femur_T1_right]" mocap="true">
+      <site name="mocap[femur_T1_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[tibia_T1_right]" mocap="true">
+      <site name="mocap[tibia_T1_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[tarsus_T1_right]" mocap="true">
+      <site name="mocap[tarsus_T1_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[claw_T1_right]" mocap="true">
+      <site name="mocap[claw_T1_right]" class="mocap_site" />
+    </body>
+    
+    <body name="mocap[coxa_T2_left]" mocap="true">
+      <site name="mocap[coxa_T2_left]" class="mocap_site"/>
+    </body>
+    <body name="mocap[femur_T2_left]" mocap="true">
+      <site name="mocap[femur_T2_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[tibia_T2_left]" mocap="true">
+      <site name="mocap[tibia_T2_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[tarsus_T2_left]" mocap="true">
+      <site name="mocap[tarsus_T2_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[claw_T2_left]" mocap="true">
+      <site name="mocap[claw_T2_left]" class="mocap_site" />
+    </body>
+    
+    <body name="mocap[coxa_T2_right]" mocap="true">
+      <site name="mocap[coxa_T2_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[femur_T2_right]" mocap="true">
+      <site name="mocap[femur_T2_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[tibia_T2_right]" mocap="true">
+      <site name="mocap[tibia_T2_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[tarsus_T2_right]" mocap="true">
+      <site name="mocap[tarsus_T2_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[claw_T2_right]" mocap="true">
+      <site name="mocap[claw_T2_right]" class="mocap_site" />
+    </body>
+    
+    <body name="mocap[coxa_T3_left]" mocap="true">
+      <site name="mocap[coxa_T3_left]" class="mocap_site"/>
+    </body>
+    <body name="mocap[femur_T3_left]" mocap="true">
+      <site name="mocap[femur_T3_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[tibia_T3_left]" mocap="true">
+      <site name="mocap[tibia_T3_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[tarsus_T3_left]" mocap="true">
+      <site name="mocap[tarsus_T3_left]" class="mocap_site" />
+    </body>
+    <body name="mocap[claw_T3_left]" mocap="true">
+      <site name="mocap[claw_T3_left]" class="mocap_site" />
+    </body>
+    
+    <body name="mocap[coxa_T3_right]" mocap="true">
+      <site name="mocap[coxa_T3_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[femur_T3_right]" mocap="true">
+      <site name="mocap[femur_T3_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[tibia_T3_right]" mocap="true">
+      <site name="mocap[tibia_T3_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[tarsus_T3_right]" mocap="true">
+      <site name="mocap[tarsus_T3_right]" class="mocap_site" />
+    </body>
+    <body name="mocap[claw_T3_right]" mocap="true">
+      <site name="mocap[claw_T3_right]" class="mocap_site" />
+    </body>
+  </worldbody>
+
+  <sensor>
+    <user name="JointVel"   dim="41"  user="0 1 0.0 10" />
+    <user name="Control"    dim="48"  user="3 50 0 100 0.3" />
+    <user name="Height"     dim="1"   user="7 5 0 100 0.1 4.0" />
+    <!-- <user name="Pos[avg]"   dim="3"   user="6 25.0 0.0 100.0 0.1" /> -->
+    <user name="Balance"    dim="2"   user="1 100 50 500 0.02 4.0" />
+    <user name="Gyro"       dim="3"   user="1 100 50 500 0.02 4.0" />
+    <user name="Upright"    dim="2"   user="2 100 50 500 0.01" />
+    <user name="Speed"      dim="1"   user="2 100 50 500 0.01" />
+
+    <user name="Pos[coxa_abduct_T1_left]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_twist_T1_left]"    dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T1_left]"          dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T1_left]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_twist_T1_left]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T1_left]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T1_left]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_abduct_T1_right]"  dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_twist_T1_right]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T1_right]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T1_right]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_twist_T1_right]"  dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T1_right]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T1_right]"       dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_abduct_T2_left]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_twist_T2_left]"    dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T2_left]"          dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T2_left]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_twist_T2_left]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T2_left]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T2_left]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_abduct_T2_right]"  dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_twist_T2_right]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T2_right]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T2_right]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_twist_T2_right]"  dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T2_right]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T2_right]"       dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_abduct_T3_left]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_twist_T3_left]"    dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T3_left]"          dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T3_left]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_twist_T3_left]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T3_left]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T3_left]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_abduct_T3_right]"  dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_twist_T3_right]"   dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[coxa_T3_right]"         dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_T3_right]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[femur_twist_T3_right]"  dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tibia_T3_right]"        dim="1" user="6 20 0.0 100.0 0.1" />
+    <user name="Pos[tarsus_T3_right]"       dim="1" user="6 20 0.0 100.0 0.1" />
+
+    <!-- <user name="Pos[claw_T1_left]"    dim="3" user="6 20 0.0 100.0 0.1" /> -->
+    <!-- <user name="Pos[claw_T1_right]"   dim="3" user="6 20 0.0 100.0 0.1" /> -->
+    <!-- <user name="Pos[claw_T2_left]"    dim="3" user="6 20 0.0 100.0 0.1" /> -->
+    <!-- <user name="Pos[claw_T2_right]"   dim="3" user="6 20 0.0 100.0 0.1" /> -->
+    <!-- <user name="Pos[claw_T3_left]"    dim="3" user="6 20 0.0 100.0 0.1" /> -->
+    <!-- <user name="Pos[claw_T3_right]"   dim="3" user="6 20 0.0 100.0 0.1" /> -->
+
+    <!-- <user name="Vel[coxa_T1_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T1_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T1_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T1_left]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T1_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T1_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T1_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T1_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T1_right]" dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T1_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T2_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T2_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T2_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T2_left]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T2_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T2_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T2_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T2_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T2_right]" dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T2_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T3_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T3_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T3_left]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T3_left]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T3_left]"    dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[coxa_T3_right]"   dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[femur_T3_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tibia_T3_right]"  dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[tarsus_T3_right]" dim="3" user="6 3 0 5.0 0.3" />
+    <user name="Vel[claw_T3_right]"   dim="3" user="6 3 0 5.0 0.3" />   -->
+    
+    <framepos name="thorax_position" objtype="body" objname="thorax"/>
+    <gyro name="thorax_gyro" site="thorax"/>
+    <subtreecom name="thorax_subcom" body="thorax"/>
+    <subtreelinvel name="thorax_subcomvel" body="thorax"/>
+    <framexaxis name="thorax_forward" objtype="xbody" objname="thorax"/>
+    <framelinvel name="thorax_velocity" objtype="body" objname="thorax"/>
+    <subtreelinvel name="head_subcomvel" body="head"/>
+
+    <framepos name="trace0" objtype="body" objname="thorax"/>
+
+    <!-- Left T1 Leg -->
+    <jointpos name="tracking_pos[coxa_abduct_T1_left]"   joint="coxa_abduct_T1_left" />
+    <jointpos name="tracking_pos[coxa_twist_T1_left]"    joint="coxa_twist_T1_left" />
+    <jointpos name="tracking_pos[coxa_T1_left]"          joint="coxa_T1_left" />
+    <jointpos name="tracking_pos[femur_T1_left]"         joint="femur_T1_left" />
+    <jointpos name="tracking_pos[femur_twist_T1_left]"   joint="femur_twist_T1_left" />
+    <jointpos name="tracking_pos[tibia_T1_left]"         joint="tibia_T1_left" />
+    <jointpos name="tracking_pos[tarsus_T1_left]"        joint="tarsus_T1_left" />
+    <!-- <framepos name="tracking_pos[claw_T1_left]"   objtype="site" objname="tracking[claw_T1_left]" /> -->
+
+    <!-- Right T1 Leg -->
+    <jointpos name="tracking_pos[coxa_abduct_T1_right]"   joint="coxa_abduct_T1_right" />
+    <jointpos name="tracking_pos[coxa_twist_T1_right]"    joint="coxa_twist_T1_right" />
+    <jointpos name="tracking_pos[coxa_T1_right]"          joint="coxa_T1_right" />
+    <jointpos name="tracking_pos[femur_T1_right]"         joint="femur_T1_right" />
+    <jointpos name="tracking_pos[femur_twist_T1_right]"   joint="femur_twist_T1_right" />
+    <jointpos name="tracking_pos[tibia_T1_right]"         joint="tibia_T1_right" />
+    <jointpos name="tracking_pos[tarsus_T1_right]"        joint="tarsus_T1_right" />
+    <!-- <framepos name="tracking_pos[claw_T1_right]"   objtype="site" objname="tracking[claw_T1_right]" /> -->
+
+    <!-- Left T2 Leg -->
+    <jointpos name="tracking_pos[coxa_abduct_T2_left]"   joint="coxa_abduct_T2_left" />
+    <jointpos name="tracking_pos[coxa_twist_T2_left]"    joint="coxa_twist_T2_left" />
+    <jointpos name="tracking_pos[coxa_T2_left]"          joint="coxa_T2_left" />
+    <jointpos name="tracking_pos[femur_T2_left]"         joint="femur_T2_left" />
+    <jointpos name="tracking_pos[femur_twist_T2_left]"   joint="femur_twist_T2_left" />
+    <jointpos name="tracking_pos[tibia_T2_left]"         joint="tibia_T2_left" />
+    <jointpos name="tracking_pos[tarsus_T2_left]"        joint="tarsus_T2_left" />
+    <!-- <framepos name="tracking_pos[claw_T2_left]"   objtype="site" objname="tracking[claw_T2_left]" /> -->
+
+    <!-- Right T2 Leg -->
+    <jointpos name="tracking_pos[coxa_abduct_T2_right]"   joint="coxa_abduct_T2_right" />
+    <jointpos name="tracking_pos[coxa_twist_T2_right]"    joint="coxa_twist_T2_right" />
+    <jointpos name="tracking_pos[coxa_T2_right]"          joint="coxa_T2_right" />
+    <jointpos name="tracking_pos[femur_T2_right]"         joint="femur_T2_right" />
+    <jointpos name="tracking_pos[femur_twist_T2_right]"   joint="femur_twist_T2_right" />
+    <jointpos name="tracking_pos[tibia_T2_right]"         joint="tibia_T2_right" />
+    <jointpos name="tracking_pos[tarsus_T2_right]"        joint="tarsus_T2_right" />
+    <!-- <framepos name="tracking_pos[claw_T2_right]"   objtype="site" objname="tracking[claw_T2_right]" /> -->
+
+    <!-- Left T3 Leg -->
+    <jointpos name="tracking_pos[coxa_abduct_T3_left]"   joint="coxa_abduct_T3_left" />
+    <jointpos name="tracking_pos[coxa_twist_T3_left]"    joint="coxa_twist_T3_left" />
+    <jointpos name="tracking_pos[coxa_T3_left]"          joint="coxa_T3_left" />
+    <jointpos name="tracking_pos[femur_T3_left]"         joint="femur_T3_left" />
+    <jointpos name="tracking_pos[femur_twist_T3_left]"   joint="femur_twist_T3_left" />
+    <jointpos name="tracking_pos[tibia_T3_left]"         joint="tibia_T3_left" />
+    <jointpos name="tracking_pos[tarsus_T3_left]"        joint="tarsus_T3_left" />
+    <!-- <framepos name="tracking_pos[claw_T3_left]"   objtype="site" objname="tracking[claw_T3_left]" /> -->
+
+    <!-- Right T3 Leg -->
+    <jointpos name="tracking_pos[coxa_abduct_T3_right]"   joint="coxa_abduct_T3_right" />
+    <jointpos name="tracking_pos[coxa_twist_T3_right]"    joint="coxa_twist_T3_right" />
+    <jointpos name="tracking_pos[coxa_T3_right]"          joint="coxa_T3_right" />
+    <jointpos name="tracking_pos[femur_T3_right]"         joint="femur_T3_right" />
+    <jointpos name="tracking_pos[femur_twist_T3_right]"   joint="femur_twist_T3_right" />
+    <jointpos name="tracking_pos[tibia_T3_right]"         joint="tibia_T3_right" />
+    <jointpos name="tracking_pos[tarsus_T3_right]"        joint="tarsus_T3_right" />
+    <!-- <framepos name="tracking_pos[claw_T3_right]"   objtype="site" objname="tracking[claw_T3_right]" /> -->
+
+  </sensor>
+
+  <!-- <include file="./keyframes/Fly_stand_free_pos2.xml" />   -->
+  <!-- <include file="./keyframes/Fly_stand_free_pos1.xml" />     -->
+  <include file="./keyframes/Fly_walk_free_qpos1.xml" /> 
+  <include file="./keyframes/Fly_walk_free_qpos2.xml" />  
+</mujoco>

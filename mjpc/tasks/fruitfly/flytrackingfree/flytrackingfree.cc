@@ -131,36 +131,104 @@ void FlyTrackingFree::ResidualFn::Residual(const mjModel *model, const mjData *d
   counter += model->nu;
 
 
-  // double axis[3];
-  // double center[3];
-  // double vec[3];
-  // double pcp[3];
-  // mju_sub3(axis, foot_right, foot_left);
-  // axis[2] = 1.0e-3;
-  // double length = 0.5 * mju_normalize3(axis) - 0.05;
-  // mju_add3(center, foot_right, foot_left);
-  // mju_scl3(center, center, 0.5);
-  // mju_sub3(vec, capture_point, center);
+  // ----- balance ----- //
+  // ----- thorax height ----- //
+  double* thorax_pos = data->xipos + 3*thorax_body_id_;
+  // double thorax_height = SensorByName(model, data, "thorax_position")[2];
+  double thorax_height = thorax_pos[2];
+  residual[counter++] = thorax_height - parameters_[0];
 
-  // // project onto axis
-  // double t = mju_dot3(vec, axis);
+  // ----- Thorax / feet ----- //
+  double* foot_pos[kNumFoot];
+  for (FlyFoot foot : kFootAll)
+    foot_pos[foot] = data->site_xpos + 3 * foot_geom_id_[foot];
 
-  // // clamp
-  // t = mju_max(-length, mju_min(length, t));
-  // mju_scl3(vec, axis, t);
-  // mju_add3(pcp, vec, center);
-  // pcp[2] = 1.0e-3;
+  double avg_foot_pos = 0.167*(foot_pos[kFootT1L][2] + foot_pos[kFootT1R][2] + foot_pos[kFootT2L][2] + foot_pos[kFootT2R][2] + foot_pos[kFootT3L][2] + foot_pos[kFootT3R][2]);
+  // avg_foot_pos = 0.167*(foot_pos[kFootT1L][2] + foot_pos[kFootT1R][2] + foot_pos[kFootT2L][2] + foot_pos[kFootT2R][2] + foot_pos[kFootT3L][2] + foot_pos[kFootT3R][2]);
+  double* coxa_right = SensorByName(model, data, "tracking_pos[coxa_T2_left]");
+  double* coxa_left = SensorByName(model, data, "tracking_pos[coxa_T2_right]");
+  // double* foot_right = foot_pos[kFootT2L];
+  // double* foot_left = foot_pos[kFootT2R];
+  residual[counter++] = avg_foot_pos - thorax_height - 0.2;
 
-  // // is standing
-  // double standing =
-  //     torso_height / mju_sqrt(torso_height * torso_height + 0.45 * 0.45) - 0.4;
 
-  // mju_sub(&residual[counter], capture_point, pcp, 2);
+  // capture point
+  double* subcom = SensorByName(model, data, "thorax_subcom");
+  double* subcomvel = SensorByName(model, data, "thorax_subcomvel");
+  
+
+  double capture_point[3];
+  mju_addScl(capture_point, subcom, subcomvel, 0.3, 3);
+  capture_point[2] = 1.0e-3;
+
+  // project onto line segment
+
+  double axis[3];
+  double center[3];
+  double vec[3];
+  double pcp[3];
+  mju_sub3(axis, coxa_right, coxa_left);
+  axis[2] = 1.0e-3;
+  double ax_len = 0.5 * mju_normalize3(axis) - 0.05;
+  mju_add3(center, coxa_right, coxa_left);
+  mju_scl3(center, center, 0.5);
+  mju_sub3(vec, capture_point, center); // maybe create axis going length of body?
+
+  // project onto axis
+  double t = mju_dot3(vec, axis);
+
+  // clamp
+  t = mju_max(-ax_len, mju_min(ax_len, t));
+  mju_scl3(vec, axis, t);
+  mju_add3(pcp, vec, center);
+  pcp[2] = 1.0e-3;
+
+  // is standing
+  double standing = thorax_height / mju_sqrt(thorax_height * thorax_height + (0.1 * 0.1)) - 0.2;
+  mju_sub(&residual[counter], capture_point, pcp, 2);
+  mju_scl(&residual[counter], &residual[counter], standing, 2);
+  counter += 2;
+
+  // ----- balance gryo ----- //
+  double* thorax_gyro = SensorByName(model, data, "thorax_gyro");
+  for (int i=0; i < 3; i++) {
+    // current gyro
+    residual[counter] = thorax_gyro[i];
+    counter += 1;
+  }
+
+  // ----- walk ----- //
+  double* thorax_forward = SensorByName(model, data, "thorax_forward");
+  // double* foot_right_forward = SensorByName(model, data, "foot_right_forward");
+  // double* foot_left_forward = SensorByName(model, data, "foot_left_forward");
+
+  double forward[2];
+  mju_copy(forward, thorax_forward, 2);
+  // mju_addTo(forward, foot_right_forward, 2);
+  // mju_addTo(forward, foot_left_forward, 2);
+  mju_normalize(forward, 2);
+
+  // com vel
+  double* head_subcomvel = SensorByName(model, data, "head_subcomvel");
+  double* thorax_velocity = SensorByName(model, data, "thorax_velocity");
+  double com_vel[2];
+  mju_add(com_vel, head_subcomvel, thorax_velocity, 2);
+  mju_scl(com_vel, com_vel, 0.5, 2);
+
+  // walk forward
+  residual[counter++] = standing * (mju_dot(com_vel, forward, 2) - parameters_[1]);
+
+  // ----- move feet ----- //
+  // double* foot_right_vel = SensorByName(model, data, "foot_right_velocity");
+  // double* foot_left_vel = SensorByName(model, data, "foot_left_velocity");
+  // double move_feet[2];
+  // mju_copy(move_feet, com_vel, 2);
+  // mju_addToScl(move_feet, foot_right_vel, -0.5, 2);
+  // mju_addToScl(move_feet, foot_left_vel, -0.5, 2);
+
+  // mju_copy(&residual[counter], move_feet, 2);
   // mju_scl(&residual[counter], &residual[counter], standing, 2);
-
   // counter += 2;
-
-
 
   // ----- position ----- //
   // Compute interpolated frame.
@@ -208,8 +276,8 @@ void FlyTrackingFree::ResidualFn::Residual(const mjModel *model, const mjData *d
   mju_scl3(avg_sensor_pos, avg_sensor_pos, 1.0 / num_body);
 
   // residual for averages
-  mju_sub3(&residual[counter], avg_mpos, avg_sensor_pos);
-  counter += 3;
+  // mju_sub3(&residual[counter], avg_mpos, avg_sensor_pos);
+  // counter += 3;
 
   for (const auto &body_name : body_names) {
     double body_mpos[3];
@@ -305,6 +373,46 @@ void FlyTrackingFree::TransitionLocked(mjModel *model, mjData *d) {
   mju_addTo(d->mocap_pos, mocap_pos_1, model->nmocap * 3);
 
   mj_freeStack(d);
+}
+
+// TODO: Make ids calulcatable for fly
+//  ============  task-state utilities  ============
+// save task-related ids
+void FlyTrackingFree::ResetLocked(const mjModel* model) {
+  // ----------  task identifiers  ----------
+  residual_.jointVel_id_ = CostTermByName(model, "JointVel");
+  residual_.control_id_ = CostTermByName(model, "Control");
+  residual_.height_id_ = CostTermByName(model, "Height");
+  residual_.balance_id_ = CostTermByName(model, "Balance");
+  residual_.upright_id_ = CostTermByName(model, "Upright");
+
+  // ----------  model identifiers  ----------
+  residual_.thorax_body_id_ = mj_name2id(model, mjOBJ_XBODY, "thorax");
+  if (residual_.thorax_body_id_ < 0) mju_error("body 'thorax' not found");
+
+  residual_.head_site_id_ = mj_name2id(model, mjOBJ_SITE, "head");
+  if (residual_.head_site_id_ < 0) mju_error("site 'head' not found");
+
+  // foot geom ids
+  int foot_index = 0;
+  for (const char* footname : {"tracking[claw_T1_left]", "tracking[claw_T1_right]",
+                               "tracking[claw_T2_left]", "tracking[claw_T2_right]",
+                               "tracking[claw_T3_left]", "tracking[claw_T3_right]"}) {
+    int foot_id = mj_name2id(model, mjOBJ_SITE, footname);
+    if (foot_id < 0) mju_error_s("geom '%s' not found", footname);
+    residual_.foot_geom_id_[foot_index] = foot_id;
+    foot_index++;
+  }
+
+  // shoulder body ids
+  // int shoulder_index = 0;
+  // for (const char* shouldername : {"FL_hip", "HL_hip", "FR_hip", "HR_hip"}) {
+  //   int foot_id = mj_name2id(model, mjOBJ_BODY, shouldername);
+  //   if (foot_id < 0) mju_error_s("body '%s' not found", shouldername);
+  //   residual_.shoulder_body_id_[shoulder_index] = foot_id;
+  //   shoulder_index++;
+  // }
+
 }
 
 }  // namespace mjpc::fruitfly

@@ -56,6 +56,8 @@ add_library(
   tasks/fruitfly/flytracking/flytracking.h
   tasks/fruitfly/flytrackingfree/flytrackingfree.cc
   tasks/fruitfly/flytrackingfree/flytrackingfree.h
+  tasks/fruitfly/flytrackingqpos/flytrackingqpos.cc
+  tasks/fruitfly/flytrackingqpos/flytrackingqpos.h
   tasks/humanoid/interact/interact.cc
   tasks/humanoid/interact/interact.h
   tasks/humanoid/interact/contact_keyframe.cc

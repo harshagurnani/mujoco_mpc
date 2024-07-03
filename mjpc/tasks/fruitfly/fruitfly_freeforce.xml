@@ -90,7 +90,7 @@
         <joint axis="1 0 0" springdamper="0.005 0.1" range="-0.2 0.2"/>
       </default>
       <default class="leg">
-        <joint stiffness="0.01" damping=".5"/>
+        <joint stiffness="0.01" damping="1"/>
         <geom density="1.21"/>
         <default class="coxa">
           <general gainprm="0.8"/>
@@ -306,7 +306,7 @@
   </asset>
 
   <worldbody>
-    <body name="thorax" childclass="body">
+    <body name="thorax" childclass="body" pos="0 0 0">
       <freejoint name="free"/>
       <light name="right" mode="trackcom" pos="0 -1 1" dir="0 1 -1" diffuse="0.3 0.3 0.3"/>
       <camera name="track1" mode="trackcom" pos="0.6 0.6 0.22" quat="0.312 0.221 0.533 0.754"/>
