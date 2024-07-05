@@ -64,19 +64,14 @@ class GenerateProtoGrpcCommand(setuptools.Command):
     ).resolve()
     assert self.build_lib is not None
     build_lib_path = Path(self.build_lib).resolve()
+    ### manually adding correct path
     build_lib_path='/Users/harshagurnani/Documents/GitHub/mujoco_mpc/python/'
     proto_module_relative_path = Path("mujoco_mpc", "proto", agent_proto_filename)
     agent_proto_destination_path = Path(build_lib_path, proto_module_relative_path)
     agent_proto_destination_path.parent.mkdir(parents=True, exist_ok=True)
     # Copy `agent_proto_filename` into current source.
     shutil.copy(agent_proto_source_path, agent_proto_destination_path)
-    print(agent_proto_destination_path)
-    print('We have successfully done this --------------------------------------- ')
-    print('We have successfully done this --------------------------------------- ')
-    print('We have successfully done this --------------------------------------- ')
-    print('We have successfully done this --------------------------------------- ')
-    print('We have successfully done this --------------------------------------- ')
-    print('We have successfully done this --------------------------------------- ')
+
 
     protoc_command_parts = [
         # We use `__file__`  as the first argument the same way as is done by
@@ -129,7 +124,7 @@ class CopyAgentServerBinaryCommand(setuptools.Command):
       )
     assert self.build_lib is not None
     build_lib_path = Path(self.build_lib).resolve()
-    print(build_lib_path)
+    ### manually adding correct path
     build_lib_path='/Users/harshagurnani/Documents/GitHub/mujoco_mpc/python/'
     destination_path = Path(build_lib_path, "mujoco_mpc", "mjpc", binary_name)
 
@@ -159,11 +154,7 @@ class CopyTaskAssetsCommand(setuptools.Command):
     self.set_undefined_options("build_ext", ("build_lib", "build_lib"))
 
   def run(self):
-    print(Path(__file__))
-    print('--------------------------')
-    print('--------------------------')
-    print('--------------------------')
-    print('--------------------------')
+    #print(Path(__file__))
     mjpc_tasks_path = Path(__file__).parent.parent / "build" / "mjpc" / "tasks"
     assert mjpc_tasks_path.exists(), "Build MJPC before installing Python API"
     source_paths = (
@@ -176,6 +167,7 @@ class CopyTaskAssetsCommand(setuptools.Command):
     relative_source_paths = tuple(p.relative_to(mjpc_tasks_path) for p in source_paths)
     assert self.build_lib is not None
     build_lib_path = Path(self.build_lib).resolve()
+    ### manually adding correct path
     build_lib_path='/Users/harshagurnani/Documents/GitHub/mujoco_mpc/python/'
     destination_dir_path = Path(build_lib_path, "mujoco_mpc", "mjpc", "tasks")
     self.announce(
