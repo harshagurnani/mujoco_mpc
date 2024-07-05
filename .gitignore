@@ -35,3 +35,8 @@ MJMODEL.TXT
 # Python
 python/dist/
 Archive/
+cmake/MujocoMacOS.cmake
+python/mujoco_mpc/mjpc/agent_server
+python/mujoco_mpc/mjpc/ui_agent_server
+/python/mujoco_mpc/proto
+cmake/MujocoMacOS.cmake

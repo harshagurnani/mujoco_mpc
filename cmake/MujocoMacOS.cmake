@@ -17,7 +17,7 @@ if(APPLE)
   # We follow https://endoflife.date/macos, which considers a version to become
   # unsupported the first time it is excluded from a macOS security update
   # (e.g. https://github.com/endoflife-date/endoflife.date/issues/1602).
-  set(MUJOCO_MACOSX_VERSION_MIN 11)
+  set(MUJOCO_MACOSX_VERSION_MIN 13)
 
   # We are setting the -mmacosx-version-min compiler flag directly rather than using the
   # CMAKE_OSX_DEPLOYMENT_TARGET variable since we do not want to affect choice of SDK,
@@ -28,6 +28,7 @@ if(APPLE)
   set(MUJOCO_MACOS_LINK_OPTIONS -mmacosx-version-min=${MUJOCO_MACOSX_VERSION_MIN}
                                 -Wl,-no_weak_imports
   )
+  set(CMAKE_CXX_FLAGS_RELEASE "-O1")
 else()
   set(MUJOCO_MACOS_COMPILE_OPTIONS "")
   set(MUJOCO_MACOS_LINK_OPTIONS "")
