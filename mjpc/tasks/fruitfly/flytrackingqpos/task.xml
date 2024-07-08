@@ -299,5 +299,6 @@
   <!-- <include file="./keyframes/Fly_stand_free_pos2.xml" />   -->
   <!-- <include file="./keyframes/Fly_stand_free_pos1.xml" />     -->
   <include file="./keyframes/Fly_walk_free_qpos1.xml" /> 
-  <include file="./keyframes/Fly_walk_free_qpos2.xml" />  
+  <!-- <include file="./keyframes/Fly_walk_free_qpos1.xml" />  -->
+  <!-- <include file="./keyframes/Fly_walk_free_qpos2.xml" />   -->
 </mujoco>
