@@ -481,19 +481,19 @@
               <geom name="tarsus_T1_left_collision" class="collision" size="0.00204" fromto="0 0 0 -0.000165 0.0235 0.00174"/>
               <site name="tracking[tarsus_T1_left]" pos="0 0 0" size="0.005" group="0" rgba="0 1 0 1"/>
               <body name="tarsus2_T1_left" pos="-0.000165 0.0235 0.00174">
-                <joint name="tarsus2_T1_left" class="extend_tarsus"/>
+                <!-- <joint name="tarsus2_T1_left" class="extend_tarsus"/> -->
                 <geom name="tarsus2_T1_left" pos="0.00813 -0.0258 -0.118" quat="0.373 0.231 0.468 -0.767" mesh="tarsus_T1_2_left"/>
                 <geom name="tarsus2_T1_left_collision" class="collision" size="0.00159" fromto="0 0 0 0.000113 0.0136 0.000556"/>
                 <body name="tarsus3_T1_left" pos="0.000113 0.0136 0.000556">
-                  <joint name="tarsus3_T1_left" class="extend_tarsus"/>
+                  <!-- <joint name="tarsus3_T1_left" class="extend_tarsus"/> -->
                   <geom name="tarsus3_T1_left" pos="0.00802 -0.0394 -0.119" quat="-0.373 -0.231 -0.468 0.767" mesh="tarsus_T1_3_left"/>
                   <geom name="tarsus3_T1_left_collision" class="collision" size="0.00149" fromto="0 0 0 -0.000255 0.00909 0.0002"/>
                   <body name="tarsus4_T1_left" pos="-0.000255 0.00909 0.0002">
-                    <joint name="tarsus4_T1_left" class="extend_tarsus"/>
+                    <!-- <joint name="tarsus4_T1_left" class="extend_tarsus"/> -->
                     <geom name="tarsus4_T1_left" pos="0.00827 -0.0485 -0.119" quat="0.373 0.231 0.468 -0.767" mesh="tarsus_T1_4_left"/>
                     <geom name="tarsus4_T1_left_collision" class="collision" size="0.00148" fromto="0 0 0 -7.12e-05 0.00906 -0.00081"/>
                     <body name="claw_T1_left" pos="-7.12e-05 0.00906 -0.00081">
-                      <joint name="tarsus5_T1_left" class="extend_tarsus"/>
+                      <!-- <joint name="tarsus5_T1_left" class="extend_tarsus"/> -->
                       <geom name="tarsal_claw_T1_left" material="brown" pos="0.00835 -0.0575 -0.118" quat="-0.373 -0.231 -0.468 0.767" mesh="tarsal_claw_T1_left_brown"/>
                       <geom name="tarsal_claw_T1_left_collision" class="adhesion-collision" type="capsule" size="0.00199" fromto="0 0 0 -7.12e-05 0.00906 -0.00081"/>
                       <site name="claw_T1_left" class="adhesion-collision" size="0.00219" fromto="0 0 0 -7.12e-05 0.00906 -0.00081"/>
@@ -530,19 +530,19 @@
               <geom name="tarsus_T1_right_collision" class="collision" size="0.00204" fromto="0 0 0 -0.000965 -0.0227 -0.00161"/>
               <site name="tracking[tarsus_T1_right]" pos="0 0 0" size="0.005" group="0" rgba="0 1 0 1"/>
               <body name="tarsus2_T1_right" pos="-0.000965 -0.0227 -0.00161">
-                <joint name="tarsus2_T1_right" class="extend_tarsus"/>
+                <!-- <joint name="tarsus2_T1_right" class="extend_tarsus"/> -->
                 <geom name="tarsus2_T1_right" pos="0.0217 0.0179 0.118" quat="0.529 -0.778 -0.299 -0.16" mesh="tarsus_T1_2_right"/>
                 <geom name="tarsus2_T1_right_collision" class="collision" size="0.00159" fromto="0 0 0 0.000143 -0.0136 -0.00168"/>
                 <body name="tarsus3_T1_right" pos="0.000143 -0.0136 -0.00168">
-                  <joint name="tarsus3_T1_right" class="extend_tarsus"/>
+                  <!-- <joint name="tarsus3_T1_right" class="extend_tarsus"/> -->
                   <geom name="tarsus3_T1_right" pos="0.0215 0.0316 0.12" quat="-0.529 0.778 0.299 0.16" mesh="tarsus_T1_3_right"/>
                   <geom name="tarsus3_T1_right_collision" class="collision" size="0.00149" fromto="0 0 0 0.000437 -0.00899 -0.00063"/>
                   <body name="tarsus4_T1_right" pos="0.000437 -0.00899 -0.00063">
-                    <joint name="tarsus4_T1_right" class="extend_tarsus"/>
+                    <!-- <joint name="tarsus4_T1_right" class="extend_tarsus"/> -->
                     <geom name="tarsus4_T1_right" pos="0.0211 0.0405 0.12" quat="0.529 -0.778 -0.299 -0.16" mesh="tarsus_T1_4_right"/>
                     <geom name="tarsus4_T1_right_collision" class="collision" size="0.00148" fromto="0 0 0 0.000765 -0.00899 0.000134"/>
                     <body name="claw_T1_right" pos="0.000765 -0.00899 0.000134">
-                      <joint name="tarsus5_T1_right" class="extend_tarsus"/>
+                      <!-- <joint name="tarsus5_T1_right" class="extend_tarsus"/> -->
                       <geom name="tarsal_claw_T1_right" material="brown" pos="0.0203 0.0495 0.12" quat="-0.529 0.778 0.299 0.16" mesh="tarsal_claw_T1_right_brown"/>
                       <geom name="tarsal_claw_T1_right_collision" class="adhesion-collision" type="capsule" size="0.00199" fromto="0 0 0 0.000765 -0.00899 0.000134"/>
                       <site name="claw_T1_right" class="adhesion-collision" size="0.00219" fromto="0 0 0 0.000765 -0.00899 0.000134"/>
@@ -579,19 +579,19 @@
               <geom name="tarsus_T2_left_collision" class="collision" size="0.00208" fromto="0 0 0 0.000471 0.0342 0.00136"/>
               <site name="tracking[tarsus_T2_left]" pos="0 0 0" size="0.005" group="0" rgba="0 1 0 1"/>
               <body name="tarsus2_T2_left" pos="0.000471 0.0342 0.00136">
-                <joint name="tarsus2_T2_left" class="extend_tarsus"/>
+                <!-- <joint name="tarsus2_T2_left" class="extend_tarsus"/> -->
                 <geom name="tarsus2_T2_left" pos="-0.0138 -0.0923 -0.104" quat="0.0774 -0.0502 0.342 -0.935" mesh="tarsus_T2_2_left"/>
                 <geom name="tarsus2_T2_left_collision" class="collision" size="0.00162" fromto="0 0 0 2.42e-05 0.0178 0.000203"/>
                 <body name="tarsus3_T2_left" pos="2.42e-05 0.0178 0.000203">
-                  <joint name="tarsus3_T2_left" class="extend_tarsus"/>
+                  <!-- <joint name="tarsus3_T2_left" class="extend_tarsus"/> -->
                   <geom name="tarsus3_T2_left" pos="-0.0139 -0.11 -0.105" quat="-0.0774 0.0502 -0.342 0.935" mesh="tarsus_T2_3_left"/>
                   <geom name="tarsus3_T2_left_collision" class="collision" size="0.00149" fromto="0 0 0 -3.11e-05 0.00991 0.000292"/>
                   <body name="tarsus4_T2_left" pos="-3.11e-05 0.00991 0.000292">
-                    <joint name="tarsus4_T2_left" class="extend_tarsus"/>
+                    <!-- <joint name="tarsus4_T2_left" class="extend_tarsus"/> -->
                     <geom name="tarsus4_T2_left" pos="-0.0138 -0.12 -0.105" quat="0.0774 -0.0502 0.342 -0.935" mesh="tarsus_T2_4_left"/>
                     <geom name="tarsus4_T2_left_collision" class="collision" size="0.00146" fromto="0 0 0 3.6e-05 0.00991 -0.000254"/>
                     <body name="claw_T2_left" pos="3.6e-05 0.00991 -0.000254">
-                      <joint name="tarsus5_T2_left" class="extend_tarsus"/>
+                      <!-- <joint name="tarsus5_T2_left" class="extend_tarsus"/> -->
                       <geom name="tarsal_claw_T2_left" material="brown" pos="-0.0139 -0.13 -0.105" quat="-0.0774 0.0502 -0.342 0.935" mesh="tarsal_claw_T2_left_brown"/>
                       <geom name="tarsal_claw_T2_left_collision" class="adhesion-collision" type="capsule" size="0.002" fromto="0 0 0 3.6e-05 0.00991 -0.000254"/>
                       <site name="claw_T2_left" class="adhesion-collision" size="0.0022" fromto="0 0 0 3.6e-05 0.00991 -0.000254"/>
@@ -628,19 +628,19 @@
               <geom name="tarsus_T2_right_collision" class="collision" size="0.00208" fromto="0 0 0 -0.000367 -0.0339 -0.00103"/>
               <site name="tracking[tarsus_T2_right]" pos="0 0 0" size="0.005" group="0" rgba="0 1 0 1"/>
               <body name="tarsus2_T2_right" pos="-0.000367 -0.0339 -0.00103">
-                <joint name="tarsus2_T2_right" class="extend_tarsus"/>
+                <!-- <joint name="tarsus2_T2_right" class="extend_tarsus"/> -->
                 <geom name="tarsus2_T2_right" pos="0.0132 0.0917 0.105" quat="0.344 -0.934 -0.0788 0.0479" mesh="tarsus_T2_2_right"/>
                 <geom name="tarsus2_T2_right_collision" class="collision" size="0.00162" fromto="0 0 0 1.72e-05 -0.0177 -0.000553"/>
                 <body name="tarsus3_T2_right" pos="1.72e-05 -0.0177 -0.000553">
-                  <joint name="tarsus3_T2_right" class="extend_tarsus"/>
+                  <!-- <joint name="tarsus3_T2_right" class="extend_tarsus"/> -->
                   <geom name="tarsus3_T2_right" pos="0.0132 0.109 0.105" quat="-0.344 0.934 0.0788 -0.0479" mesh="tarsus_T2_3_right"/>
                   <geom name="tarsus3_T2_right_collision" class="collision" size="0.00149" fromto="0 0 0 5.07e-05 -0.00988 -0.000293"/>
                   <body name="tarsus4_T2_right" pos="5.07e-05 -0.00988 -0.000293">
-                    <joint name="tarsus4_T2_right" class="extend_tarsus"/>
+                    <!-- <joint name="tarsus4_T2_right" class="extend_tarsus"/> -->
                     <geom name="tarsus4_T2_right" pos="0.0132 0.119 0.106" quat="0.344 -0.934 -0.0788 0.0479" mesh="tarsus_T2_4_right"/>
                     <geom name="tarsus4_T2_right_collision" class="collision" size="0.00146" fromto="0 0 0 -9.66e-05 -0.00988 0.000252"/>
                     <body name="claw_T2_right" pos="-9.66e-05 -0.00988 0.000252">
-                      <joint name="tarsus5_T2_right" class="extend_tarsus"/>
+                      <!-- <joint name="tarsus5_T2_right" class="extend_tarsus"/> -->
                       <geom name="tarsal_claw_T2_right" material="brown" pos="0.0133 0.129 0.105" quat="-0.344 0.934 0.0788 -0.0479" mesh="tarsal_claw_T2_right_brown"/>
                       <geom name="tarsal_claw_T2_right_collision" class="adhesion-collision" type="capsule" size="0.002" fromto="0 0 0 -9.66e-05 -0.00988 0.000252"/>
                       <site name="claw_T2_right" class="adhesion-collision" size="0.0022" fromto="0 0 0 -9.66e-05 -0.00988 0.000252"/>
@@ -677,19 +677,19 @@
               <geom name="tarsus_T3_left_collision" class="collision" size="0.00234" fromto="0 0 0 0.00027 0.0337 0.00102"/>
               <site name="tracking[tarsus_T3_left]" pos="0 0 0" size="0.005" group="0" rgba="0 1 0 1"/>
               <body name="tarsus2_T3_left" pos="0.00027 0.0337 0.00102">
-                <joint name="tarsus2_T3_left" class="extend_tarsus"/>
+                <!-- <joint name="tarsus2_T3_left" class="extend_tarsus"/> -->
                 <geom name="tarsus2_T3_left" pos="-0.00915 -0.128 -0.11" quat="0.49 0.138 -0.251 0.823" mesh="tarsus_T3_2_left"/>
                 <geom name="tarsus2_T3_left_collision" class="collision" size="0.00168" fromto="0 0 0 -7.97e-05 0.0197 0.00158"/>
                 <body name="tarsus3_T3_left" pos="-7.97e-05 0.0197 0.00158">
-                  <joint name="tarsus3_T3_left" class="extend_tarsus"/>
+                  <!-- <joint name="tarsus3_T3_left" class="extend_tarsus"/> -->
                   <geom name="tarsus3_T3_left" pos="-0.00907 -0.148 -0.112" quat="-0.49 -0.138 0.251 -0.823" mesh="tarsus_T3_3_left"/>
                   <geom name="tarsus3_T3_left_collision" class="collision" size="0.00145" fromto="0 0 0 8e-05 0.0111 -2.78e-05"/>
                   <body name="tarsus4_T3_left" pos="8e-05 0.0111 -2.78e-05">
-                    <joint name="tarsus4_T3_left" class="extend_tarsus"/>
+                    <!-- <joint name="tarsus4_T3_left" class="extend_tarsus"/> -->
                     <geom name="tarsus4_T3_left" pos="-0.00915 -0.159 -0.112" quat="0.49 0.138 -0.251 0.823" mesh="tarsus_T3_4_left"/>
                     <geom name="tarsus4_T3_left_collision" class="collision" size="0.00145" fromto="0 0 0 0.000222 0.0111 -0.00108"/>
                     <body name="claw_T3_left" pos="0.000222 0.0111 -0.00108">
-                      <joint name="tarsus5_T3_left" class="extend_tarsus"/>
+                      <!-- <joint name="tarsus5_T3_left" class="extend_tarsus"/> -->
                       <geom name="tarsal_claw_T3_left" material="brown" pos="-0.00937 -0.17 -0.111" quat="-0.49 -0.138 0.251 -0.823" mesh="tarsal_claw_T3_left_brown"/>
                       <geom name="tarsal_claw_T3_left_collision" class="adhesion-collision" type="capsule" size="0.0019" fromto="0 0 0 0.000222 0.0111 -0.00108"/>
                       <site name="claw_T3_left" class="adhesion-collision" size="0.00209" fromto="0 0 0 0.000222 0.0111 -0.00108"/>
@@ -726,19 +726,19 @@
               <geom name="tarsus_T3_right_collision" class="collision" size="0.00234" fromto="0 0 0 -0.00073 -0.0338 -0.00122"/>
               <site name="tracking[tarsus_T3_right]" pos="0 0 0" size="0.005" group="0" rgba="0 1 0 1"/>
               <body name="tarsus2_T3_right" pos="-0.00073 -0.0338 -0.00122">
-                <joint name="tarsus2_T3_right" class="extend_tarsus"/>
+                <!-- <joint name="tarsus2_T3_right" class="extend_tarsus"/> -->
                 <geom name="tarsus2_T3_right" pos="0.0087 0.128 0.111" quat="0.252 -0.823 0.49 0.136" mesh="tarsus_T3_2_right"/>
                 <geom name="tarsus2_T3_right_collision" class="collision" size="0.00168" fromto="0 0 0 0.000185 -0.0197 -0.00157"/>
                 <body name="tarsus3_T3_right" pos="0.000185 -0.0197 -0.00157">
-                  <joint name="tarsus3_T3_right" class="extend_tarsus"/>
+                  <!-- <joint name="tarsus3_T3_right" class="extend_tarsus"/> -->
                   <geom name="tarsus3_T3_right" pos="0.00851 0.148 0.112" quat="-0.252 0.823 -0.49 -0.136" mesh="tarsus_T3_3_right"/>
                   <geom name="tarsus3_T3_right_collision" class="collision" size="0.00145" fromto="0 0 0 1.98e-05 -0.011 1.95e-05"/>
                   <body name="tarsus4_T3_right" pos="1.98e-05 -0.011 1.95e-05">
-                    <joint name="tarsus4_T3_right" class="extend_tarsus"/>
+                    <!-- <joint name="tarsus4_T3_right" class="extend_tarsus"/> -->
                     <geom name="tarsus4_T3_right" pos="0.00849 0.159 0.112" quat="0.252 -0.823 0.49 0.136" mesh="tarsus_T3_4_right"/>
                     <geom name="tarsus4_T3_right_collision" class="collision" size="0.00145" fromto="0 0 0 4.3e-05 -0.011 0.00125"/>
                     <body name="claw_T3_right" pos="4.3e-05 -0.011 0.00125">
-                      <joint name="tarsus5_T3_right" class="extend_tarsus"/>
+                      <!-- <joint name="tarsus5_T3_right" class="extend_tarsus"/> -->
                       <geom name="tarsal_claw_T3_right" material="brown" pos="0.00845 0.17 0.111" quat="-0.252 0.823 -0.49 -0.136" mesh="tarsal_claw_T3_right_brown"/>
                       <geom name="tarsal_claw_T3_right_collision" class="adhesion-collision" type="capsule" size="0.0019" fromto="0 0 0 4.3e-05 -0.011 0.00125"/>
                       <site name="claw_T3_right" class="adhesion-collision" size="0.00209" fromto="0 0 0 4.3e-05 -0.011 0.00125"/>
@@ -784,7 +784,7 @@
     <exclude name="rostrum_labrum_right" body1="rostrum" body2="labrum_right"/>
   </contact>
 
-  <tendon>
+  <!-- <tendon> -->
     <!-- <fixed name="abduct_abdomen">
       <joint joint="abdomen_abduct" coef="1"/>
       <joint joint="abdomen_abduct_2" coef="1"/>
@@ -803,7 +803,7 @@
       <joint joint="abdomen_6" coef="1"/>
       <joint joint="abdomen_7" coef="1"/>
     </fixed> -->
-    <fixed name="tarsus2_T1_left" class="extend_tarsus">
+    <!-- <fixed name="tarsus2_T1_left" class="extend_tarsus">
       <joint joint="tarsus2_T1_left" coef="1"/>
       <joint joint="tarsus3_T1_left" coef="0.5"/>
       <joint joint="tarsus4_T1_left" coef="0.5"/>
@@ -838,8 +838,8 @@
       <joint joint="tarsus3_T3_right" coef="0.5"/>
       <joint joint="tarsus4_T3_right" coef="0.5"/>
       <joint joint="tarsus5_T3_right" coef="0.5"/>
-    </fixed>
-  </tendon>
+    </fixed> -->
+  <!-- </tendon> -->
 
   <actuator>
     <motor name="coxa_abduct_T1_left"   class="abduct_coxa_T1" joint="coxa_abduct_T1_left"/>
@@ -849,7 +849,7 @@
     <motor name="femur_twist_T1_left"   class="twist_femur" joint="femur_twist_T1_left"/>
     <motor name="tibia_T1_left"         class="extend_tibia" joint="tibia_T1_left"/>
     <motor name="tarsus_T1_left"        class="extend_tarsus_T1" joint="tarsus_T1_left"/>
-    <motor name="tarsus2_T1_left"       class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T1_left"/>
+    <!-- <motor name="tarsus2_T1_left"       class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T1_left"/> -->
     <motor name="coxa_abduct_T1_right"  class="abduct_coxa_T1" joint="coxa_abduct_T1_right"/>
     <motor name="coxa_twist_T1_right"   class="twist_coxa_T1" joint="coxa_twist_T1_right"/>
     <motor name="coxa_T1_right"         class="extend_coxa_T1" joint="coxa_T1_right"/>
@@ -857,7 +857,7 @@
     <motor name="femur_twist_T1_right"  class="twist_femur" joint="femur_twist_T1_right"/>
     <motor name="tibia_T1_right"        class="extend_tibia" joint="tibia_T1_right"/>
     <motor name="tarsus_T1_right"       class="extend_tarsus_T1" joint="tarsus_T1_right"/>
-    <motor name="tarsus2_T1a_right"     class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T1_right"/>
+    <!-- <motor name="tarsus2_T1a_right"     class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T1_right"/> -->
     <motor name="coxa_abduct_T2_left"   class="abduct_coxa_T2" joint="coxa_abduct_T2_left"/>
     <motor name="coxa_twist_T2_left"    class="twist_coxa_T2" joint="coxa_twist_T2_left"/>
     <motor name="coxa_T2_left"          class="extend_coxa_T2" joint="coxa_T2_left"/>
@@ -865,7 +865,7 @@
     <motor name="femur_twist_T2_left"   class="twist_femur_T2" joint="femur_twist_T2_left"/>
     <motor name="tibia_T2_left"         class="extend_tibia_T2" joint="tibia_T2_left"/>
     <motor name="tarsus_T2_left"        class="extend_tarsus_T2" joint="tarsus_T2_left"/>
-    <motor name="tarsus2_T2_left"       class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T2_left"/>
+    <!-- <motor name="tarsus2_T2_left"       class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T2_left"/> -->
     <motor name="coxa_abduct_T2_right"  class="abduct_coxa_T2" joint="coxa_abduct_T2_right"/>
     <motor name="coxa_twist_T2_right"   class="twist_coxa_T2" joint="coxa_twist_T2_right"/>
     <motor name="coxa_T2_right"         class="extend_coxa_T2" joint="coxa_T2_right"/>
@@ -873,7 +873,7 @@
     <motor name="femur_twist_T2_right"  class="twist_femur_T2" joint="femur_twist_T2_right"/>
     <motor name="tibia_T2_right"        class="extend_tibia_T2" joint="tibia_T2_right"/>
     <motor name="tarsus_T2_right"       class="extend_tarsus_T2" joint="tarsus_T2_right"/>
-    <motor name="tarsus2_T2_right"      class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T2_right"/>
+    <!-- <motor name="tarsus2_T2_right"      class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T2_right"/> -->
     <motor name="coxa_abduct_T3_left"   class="abduct_coxa_T3" joint="coxa_abduct_T3_left"/>
     <motor name="coxa_twist_T3_left"    class="twist_coxa_T3" joint="coxa_twist_T3_left"/>
     <motor name="coxa_T3_left"          class="extend_coxa_T3" joint="coxa_T3_left"/>
@@ -881,7 +881,7 @@
     <motor name="femur_twist_T3_left"   class="twist_femur_T3" joint="femur_twist_T3_left"/>
     <motor name="tibia_T3_left"         class="extend_tibia_T3" joint="tibia_T3_left"/>
     <motor name="tarsus_T3_left"        class="extend_tarsus_T3" joint="tarsus_T3_left"/>
-    <motor name="tarsus2_T3_left"       class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T3_left"/>
+    <!-- <motor name="tarsus2_T3_left"       class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T3_left"/> -->
     <motor name="coxa_abduct_T3_right"  class="abduct_coxa_T3" joint="coxa_abduct_T3_right"/>
     <motor name="coxa_twist_T3_right"   class="twist_coxa_T3" joint="coxa_twist_T3_right"/>
     <motor name="coxa_T3_right"         class="extend_coxa_T3" joint="coxa_T3_right"/>
@@ -889,7 +889,7 @@
     <motor name="femur_twist_T3_right"  class="twist_femur_T3" joint="femur_twist_T3_right"/>
     <motor name="tibia_T3_right"        class="extend_tibia_T3" joint="tibia_T3_right"/>
     <motor name="tarsus_T3_right"       class="extend_tarsus_T3" joint="tarsus_T3_right"/>
-    <motor name="tarsus2_T3_right"      class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T3_right"/>
+    <!-- <motor name="tarsus2_T3_right"      class="extend_tarsus" ctrlrange="-0.9 0.9" tendon="tarsus2_T3_right"/> -->
     <!-- <adhesion name="adhere_labrum_left" class="adhesion_labrum" body="labrum_left"/>
     <adhesion name="adhere_labrum_right" class="adhesion_labrum" body="labrum_right"/>
     <adhesion name="adhere_claw_T1_left" class="adhesion_claw" body="claw_T1_left"/>
