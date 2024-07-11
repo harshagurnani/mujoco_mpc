@@ -39,23 +39,13 @@ std::tuple<int, int, double, double> ComputeInterpolationValues(double index,
 }
 
 // Hardcoded constant matching keyframes from CMU mocap dataset.
-constexpr double kFps = 200.0;
+constexpr double kFps = 60.0;
 
 constexpr int kMotionLengths[] = {
-    1700,   // FlytrackingQpos
-    1560,  // FlytrackingQpos
+    1800,   // FlytrackingQpos
+    99,  // FlyStand
+    // 1560,  // FlytrackingQpos
     // 8,  // FlyStand
-    // 8,  // FlyStand
-           // 121,  // Jump - CMU-CMU-02-02_04
-           // 154,  // Kick Spin - CMU-CMU-87-87_01
-           // 115,  // Spin Kick - CMU-CMU-88-88_06
-           // 78,   // Cartwheel (1) - CMU-CMU-88-88_07
-           // 145,  // Crouch Flip - CMU-CMU-88-88_08
-           // 188,  // Cartwheel (2) - CMU-CMU-88-88_09
-           // 260,  // Monkey Flip - CMU-CMU-90-90_19
-           // 279,  // Dance - CMU-CMU-103-103_08
-           // 39,   // Run - CMU-CMU-108-108_13
-           // 510,  // Walk - CMU-CMU-137-137_40
 };
 
 // return length of motion trajectory
@@ -272,7 +262,7 @@ void FlyTrackingQpos::ResidualFn::Residual(const mjModel *model, const mjData *d
     // std::string mocap_body_name = joint_name;
     int joint_body_id = mj_name2id(model, mjOBJ_JOINT, joint_name.c_str());
     assert(0 <= joint_body_id);
-    int body_mocapid = model->key_qpos[joint_body_id];
+    int body_mocapid = joint_body_id+7;
     assert(0 <= body_mocapid);
 
     // current frame
@@ -331,31 +321,28 @@ void FlyTrackingQpos::ResidualFn::Residual(const mjModel *model, const mjData *d
     counter += 1;
   }
 
-  // // ----- velocity ----- //
-  // for (const auto &body_name : body_names) {
-  //   std::string mocap_body_name = "mocap[" + body_name + "]";
-  //   std::string linvel_sensor_name = "tracking_linvel[" + body_name + "]";
-  //   int mocap_body_id = mj_name2id(model, mjOBJ_BODY, mocap_body_name.c_str());
-  //   assert(0 <= mocap_body_id);
-  //   int body_mocapid = model->body_mocapid[mocap_body_id];
-  //   assert(0 <= body_mocapid);
+  // ----- velocity ----- //
+  for (const auto &joint_name : joint_names) {
+    std::string linvel_sensor_name = "tracking_vel[" + joint_name + "]";
+    int joint_body_id = mj_name2id(model, mjOBJ_JOINT, joint_name.c_str());
+    assert(0 <= joint_body_id);
+    int body_mocapid = joint_body_id+7;
+    assert(0 <= body_mocapid);
 
-  //   // compute finite-difference velocity
-  //   mju_copy3(
-  //       &residual[counter],
-  //       model->key_mpos + model->nmocap * 3 * key_index_1 + 3 * body_mocapid);
-  //   mju_subFrom3(
-  //       &residual[counter],
-  //       model->key_mpos + model->nmocap * 3 * key_index_0 + 3 * body_mocapid);
-  //   mju_scl3(&residual[counter], &residual[counter], kFps);
+    // compute finite-difference velocity
+    mju_copy3(
+        &residual[counter], model->key_qpos + model->nq * key_index_1 + body_mocapid);
+    mju_subFrom3(
+        &residual[counter], model->key_mpos + model->nq * key_index_0 + body_mocapid);
+    mju_scl3(&residual[counter], &residual[counter], kFps);
 
-  //   // subtract current velocity
-  //   double *sensor_linvel =
-  //       SensorByName(model, data, linvel_sensor_name.c_str());
-  //   mju_subFrom3(&residual[counter], sensor_linvel);
+    // subtract current velocity
+    double *sensor_linvel =
+        SensorByName(model, data, linvel_sensor_name.c_str());
+    mju_subFrom3(&residual[counter], sensor_linvel);
 
-  //   counter += 3;
-  // }
+    counter += 1;
+  }
 
   CheckSensorDim(model, counter);
 }
